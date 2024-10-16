@@ -14,35 +14,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Configurazione dell'ambiente LaTeX (opzionale, se necessario)
-      - name: Install LaTeX packages
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-full
-
-      # Step 3: Compilazione del CV in Inglese
+      # Step 2: Compilazione del CV in Inglese
       - name: Compile CV-EN
         uses: xu-cheng/latex-action@v3
         with:
           root_file: CV-EN/main.tex
           latexmk_shell_escape: true
 
-      # Step 4: Rinominare il PDF del CV in Inglese
+      # Step 3: Rinominare il PDF del CV in Inglese
       - name: Rename CV-EN PDF
         run: mv CV-EN/main.pdf CV_EN.pdf
 
-      # Step 5: Compilazione del CV in Italiano
+      # Step 4: Compilazione del CV in Italiano
       - name: Compile CV-IT
         uses: xu-cheng/latex-action@v3
         with:
           root_file: CV-IT/main.tex
           latexmk_shell_escape: true
 
-      # Step 6: Rinominare il PDF del CV in Italiano
+      # Step 5: Rinominare il PDF del CV in Italiano
       - name: Rename CV-IT PDF
         run: mv CV-IT/main.pdf CV_IT.pdf
 
-      # Step 7: Caricare entrambi i PDF come artifact
+      # Step 6: Caricare entrambi i PDF come artifact
       - name: Upload PDF files
         uses: actions/upload-artifact@v4
         with:
