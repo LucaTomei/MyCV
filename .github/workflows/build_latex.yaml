@@ -20,39 +20,37 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y texlive-full biber
 
-      # Step 3: Visualizzare la struttura delle cartelle
-      - name: List directory contents
+      # Step 3: Verificare la presenza delle immagini nel CV-EN
+      - name: List CV-EN/cve/ directory
         run: |
-          ls -R
+          echo "Contenuto di CV-EN/cve/:"
+          ls -l CV-EN/cve/
 
-      # Step 4: Compilare il CV in Inglese
+      # Step 4: Verificare la presenza delle immagini nel CV-IT
+      - name: List CV-IT/cve/ directory
+        run: |
+          echo "Contenuto di CV-IT/cve/:"
+          ls -l CV-IT/cve/
+
+      # Step 5: Compilare il CV in Inglese
       - name: Compile CV-EN
         run: |
           cd CV-EN
           latexmk -pdf -shell-escape main.tex
 
-      # Step 5: Rinomina il PDF del CV in Inglese
+      # Step 6: Rinomina il PDF del CV in Inglese
       - name: Rename CV-EN PDF
         run: mv CV-EN/main.pdf CV_EN.pdf
 
-      # Step 6: Compilare il CV in Italiano
+      # Step 7: Compilare il CV in Italiano
       - name: Compile CV-IT
         run: |
           cd CV-IT
           latexmk -pdf -shell-escape main.tex
 
-      # Step 7: Rinomina il PDF del CV in Italiano
+      # Step 8: Rinomina il PDF del CV in Italiano
       - name: Rename CV-IT PDF
         run: mv CV-IT/main.pdf CV_IT.pdf
-
-      # Step 8: Visualizzare i log di compilazione in caso di errore
-      - name: Show LaTeX log on failure
-        if: failure()
-        run: |
-          echo "CV-EN Log:"
-          cat CV-EN/main.log
-          echo "CV-IT Log:"
-          cat CV-IT/main.log
 
       # Step 9: Caricare entrambi i PDF come artifact
       - name: Upload PDF files
