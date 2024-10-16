@@ -3,7 +3,7 @@ name: Build LaTeX Documents
 on:
   push:
     branches:
-      - main  # Puoi specificare i rami che preferisci
+      - main  # Puoi specificare altri rami se necessario
 
 jobs:
   build_latex:
@@ -14,29 +14,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Compilazione del CV in Inglese
-      - name: Compile CV-EN
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: CV-EN/main.tex
-          latexmk_shell_escape: true
+      # Step 2: Installa LaTeX
+      # Questo step installa una distribuzione completa di LaTeX. Se preferisci una versione più leggera, puoi personalizzare questo comando.
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full
 
-      # Step 3: Rinominare il PDF del CV in Inglese
+      # Step 3: Compila il CV in Inglese
+      - name: Compile CV-EN
+        run: |
+          cd CV-EN
+          latexmk -pdf -shell-escape main.tex
+
+      # Step 4: Rinomina il PDF del CV in Inglese
       - name: Rename CV-EN PDF
         run: mv CV-EN/main.pdf CV_EN.pdf
 
-      # Step 4: Compilazione del CV in Italiano
+      # Step 5: Compila il CV in Italiano
       - name: Compile CV-IT
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: CV-IT/main.tex
-          latexmk_shell_escape: true
+        run: |
+          cd CV-IT
+          latexmk -pdf -shell-escape main.tex
 
-      # Step 5: Rinominare il PDF del CV in Italiano
+      # Step 6: Rinomina il PDF del CV in Italiano
       - name: Rename CV-IT PDF
         run: mv CV-IT/main.pdf CV_IT.pdf
 
-      # Step 6: Caricare entrambi i PDF come artifact
+      # Step 7: Carica entrambi i PDF come artifact
       - name: Upload PDF files
         uses: actions/upload-artifact@v4
         with:
