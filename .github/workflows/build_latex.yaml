@@ -3,7 +3,7 @@ name: Build LaTeX Documents
 on:
   push:
     branches:
-      - main  # Puoi specificare altri rami se necessario
+      - main  # Specifica i rami che preferisci
 
 jobs:
   build_latex:
@@ -14,27 +14,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Cache dei pacchetti LaTeX (opzionale ma consigliato)
-      - name: Cache LaTeX packages
-        uses: actions/cache@v3
-        with:
-          path: /usr/local/texlive/2024
-          key: ${{ runner.os }}-latex-${{ hashFiles('**/*.tex', '**/*.bib') }}
-          restore-keys: |
-            ${{ runner.os }}-latex-
-
-      # Step 3: Installare LaTeX e biber
+      # Step 2: Installare LaTeX e Biber
       - name: Install LaTeX and Biber
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-full biber
-          sudo tlmgr install lato  # Se necessario
+
+      # Step 3: Visualizzare la struttura delle cartelle
+      - name: List directory contents
+        run: |
+          ls -R
 
       # Step 4: Compilare il CV in Inglese
       - name: Compile CV-EN
         run: |
           cd CV-EN
-          latexmk -pdf -shell-escape -bibtex main.tex
+          latexmk -pdf -shell-escape main.tex
 
       # Step 5: Rinomina il PDF del CV in Inglese
       - name: Rename CV-EN PDF
@@ -44,13 +39,22 @@ jobs:
       - name: Compile CV-IT
         run: |
           cd CV-IT
-          latexmk -pdf -shell-escape -bibtex main.tex
+          latexmk -pdf -shell-escape main.tex
 
       # Step 7: Rinomina il PDF del CV in Italiano
       - name: Rename CV-IT PDF
         run: mv CV-IT/main.pdf CV_IT.pdf
 
-      # Step 8: Caricare entrambi i PDF come artifact
+      # Step 8: Visualizzare i log di compilazione in caso di errore
+      - name: Show LaTeX log on failure
+        if: failure()
+        run: |
+          echo "CV-EN Log:"
+          cat CV-EN/main.log
+          echo "CV-IT Log:"
+          cat CV-IT/main.log
+
+      # Step 9: Caricare entrambi i PDF come artifact
       - name: Upload PDF files
         uses: actions/upload-artifact@v4
         with:
