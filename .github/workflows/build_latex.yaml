@@ -20,18 +20,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y texlive-full biber
 
-      # Step 3: Verificare la presenza delle immagini nel CV-EN
-      - name: List CV-EN/cve/ directory
-        run: |
-          echo "Contenuto di CV-EN/cve/:"
-          ls -l CV-EN/cve/
-
-      # Step 4: Verificare la presenza delle immagini nel CV-IT
-      - name: List CV-IT/cve/ directory
-        run: |
-          echo "Contenuto di CV-IT/cve/:"
-          ls -l CV-IT/cve/
-
       # Step 5: Compilare il CV in Inglese
       - name: Compile CV-EN
         run: |
