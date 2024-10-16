@@ -14,34 +14,43 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Installa LaTeX
-      # Questo step installa una distribuzione completa di LaTeX. Se preferisci una versione più leggera, puoi personalizzare questo comando.
-      - name: Install LaTeX
+      # Step 2: Cache dei pacchetti LaTeX (opzionale ma consigliato)
+      - name: Cache LaTeX packages
+        uses: actions/cache@v3
+        with:
+          path: /usr/local/texlive/2024
+          key: ${{ runner.os }}-latex-${{ hashFiles('**/*.tex', '**/*.bib') }}
+          restore-keys: |
+            ${{ runner.os }}-latex-
+
+      # Step 3: Installare LaTeX e biber
+      - name: Install LaTeX and Biber
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-full
+          sudo apt-get install -y texlive-full biber
+          sudo tlmgr install lato  # Se necessario
 
-      # Step 3: Compila il CV in Inglese
+      # Step 4: Compilare il CV in Inglese
       - name: Compile CV-EN
         run: |
           cd CV-EN
-          latexmk -pdf -shell-escape main.tex
+          latexmk -pdf -shell-escape -bibtex main.tex
 
-      # Step 4: Rinomina il PDF del CV in Inglese
+      # Step 5: Rinomina il PDF del CV in Inglese
       - name: Rename CV-EN PDF
         run: mv CV-EN/main.pdf CV_EN.pdf
 
-      # Step 5: Compila il CV in Italiano
+      # Step 6: Compilare il CV in Italiano
       - name: Compile CV-IT
         run: |
           cd CV-IT
-          latexmk -pdf -shell-escape main.tex
+          latexmk -pdf -shell-escape -bibtex main.tex
 
-      # Step 6: Rinomina il PDF del CV in Italiano
+      # Step 7: Rinomina il PDF del CV in Italiano
       - name: Rename CV-IT PDF
         run: mv CV-IT/main.pdf CV_IT.pdf
 
-      # Step 7: Carica entrambi i PDF come artifact
+      # Step 8: Caricare entrambi i PDF come artifact
       - name: Upload PDF files
         uses: actions/upload-artifact@v4
         with:
