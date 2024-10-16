@@ -44,7 +44,7 @@ jobs:
       - name: Upload PDF files
         uses: actions/upload-artifact@v4
         with:
-          name: LaTeX_PDFs
+          name: CVE_PDFs
           path: |
             CV_EN.pdf
             CV_IT.pdf
