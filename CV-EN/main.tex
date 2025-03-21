@@ -1,253 +1,312 @@
-%%%%%%%%%%%%%%%%%
-% This is an example CV created using altacv.cls (v1.1.4, 27 July 2018) written by
-% LianTze Lim (liantze@gmail.com), based on the
-% Cv created by BusinessInsider at http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/?r=US&IR=T
-%
-%% It may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%%    http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
-%% version 2003/12/01 or later.
-%%%%%%%%%%%%%%%%
+%%%%
+% Luca Tomei's Resume
+%%%%
 
-%% If you want to use \orcid or the
-%% academicons icons, add "academicons"
-%% to the \documentclass options.
-%% Then compile with XeLaTeX or LuaLaTeX.
-% \documentclass[10pt,a4paper,academicons]{altacv}
+\documentclass[letterpaper,10pt]{article}
 
-%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
-% \documentclass[10pt,a4paper,normalphoto]{altacv}
+% Dependencies
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{graphicx}
 
-\documentclass[10pt,a4paper]{altacv}
+% Serif
+\usepackage{CormorantGaramond}
+\usepackage{charter}
 
-%% AltaCV uses the fontawesome and academicon fonts
-%% and packages.
-%% See texdoc.net/pkg/fontawecome and http://texdoc.net/pkg/academicons for full list of symbols.
-%% When using the "academicons" option,
-%% Compile with LuaLaTeX for best results. If you
-%% want to use XeLaTeX, you may need to install
-%% Academicons.ttf in your operating system's font %% folder.
+% Colors
+\usepackage{xcolor}
+\definecolor{accentTitle}{HTML}{008080}
+\definecolor{accentText}{HTML}{008080}
+\definecolor{accentLine}{HTML}{666666}
 
+% Misc. Options
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\urlstyle{same}
 
-% Change the page layout if you need to
-\geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1cm,bottom=1cm}
+% Adjust Margins
+\addtolength{\oddsidemargin}{-0.7in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.4in}
 
-% Change the font if you want to.
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\setlength{\tabcolsep}{0pt}
+\setlength{\footskip}{3.7pt}
+\raggedbottom
+\raggedright
 
-% If using pdflatex:
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[default]{lato}
-\usepackage {hyperref}
+% ATS Readability
+\input{glyphtounicode}
+\pdfgentounicode=1
 
+%-----------------%
+% Custom Commands %
+%-----------------%
 
-% If using xelatex or lualatex:
-% \setmainfont{Lato}
-
-% Change the colours if you want to
-\definecolor{VividPurple}{HTML}{008080}
-\definecolor{SlateGrey}{HTML}{2E2E2E}
-\definecolor{LightGrey}{HTML}{666666}
-\colorlet{heading}{VividPurple}
-\colorlet{accent}{VividPurple}
-\colorlet{emphasis}{SlateGrey}
-\colorlet{body}{LightGrey}
-
-% Change the bullets for itemize and rating marker
-% for \cvskill if you want to
-\renewcommand{\itemmarker}{{\small\textbullet}}
-\renewcommand{\ratingmarker}{\faCircle}
-
-%% sample.bib contains your publications
-\addbibresource{sample.bib}
-
-\begin{document}
-\name{Luca Tomei}
-\tagline{Computer Engineering Doctor}
-
-\photo{2.5cm}{3}
-\personalinfo{%
-  % Not all of these are required!
-  % You can add your own with \printinfo{symbol}{detail}
-  \homepage{\href{lucatomei.github.io}{lucatomei.github.io}}
-  \email{luca.tom1995@gmail.com}
-  \phone{+393505613338}
-  \location{Tivoli (RM) , Italy}
-  \linebreak
-  \twitter{@LucaTomei1995}
-  \linkedin{www.linkedin.com/in/TomeiLuca}\\
-  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \github{github.com/LucaTomei} 
+\newcommand{\documentTitle}[2]{
+  \begin{center}
+    \begin{minipage}{0.85\textwidth}
+      {\Huge\color{accentTitle} #1}
+    \end{minipage}
+    \begin{minipage}{0.12\textwidth}
+      \includegraphics[width=\textwidth]{foto.jpg}
+    \end{minipage}\\[5pt]
+    {\color{accentLine} \hrule}
+    \vspace{2pt}
+    \footnotesize{#2}
+    \vspace{2pt}
+    {\color{accentLine} \hrule}
+  \end{center}
 }
 
-%% Make the header extend all the way to the right, if you want.
-\begin{fullwidth}
-\makecvheader
-\end{fullwidth}
+\newcommand{\documentFooter}[1]{
+  \setlength{\footskip}{10.25pt}
+  \fancyfoot[C]{\footnotesize #1}
+}
 
-%% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
-\AtBeginEnvironment{itemize}{\small}
+\titleformat{\section}{
+  \vspace{-5pt}
+  \color{accentText}
+  \raggedright\large\bfseries
+}{}{0em}{}[\color{accentLine}\titlerule]
 
-%% Provide the file name containing the sidebar contents as an optional parameter to \cvsection.
-%% You can always just use \marginpar{...} if you do
-%% not need to align the top of the contents to any
-%% \cvsection title in the "main" bar.
-\cvsection[page1sidebar]{Education}
-\cvevent{Computer Engineering Doctor (Master's Degree)} {Sapienza University of Rome}{January 2020 - October 2021}{Rome, Italy} 
-\textsc{}
-\\
-\cvevent{Computer Engineering Doctor (Three Years Degree)} {Sapienza University of Rome}{2016 - 2019}{Rome, Italy} 
-\textsc{}
-\\
-\cvevent{Scientific high school diploma}{Ettore Majorana High School}{2009-2014}{Guidonia, Italy}
+\newcommand{\tinysection}[1]{
+  \phantomsection
+  \addcontentsline{toc}{section}{#1}
+  {\large{\bfseries\color{accentText}#1} {\color{accentLine} |}}
+}
 
-% \divider
+\newcommand{\heading}[2]{
+  \hspace{10pt}#1\hfill#2\\
+}
 
-% \cvevent{Product Engineer}{Google}{23 June 1999 -- 2001}{Palo Alto, CA}
+\newcommand{\headingBf}[2]{
+  \heading{\textbf{#1}}{\textbf{#2}}
+}
 
-% \begin{itemize}
-% \item Joined the company as employe \#20 and female employee \#1
-% \item Developed targeted advertisement in order to use user's search queries and show them related ads
-% \end{itemize}
+\newcommand{\headingIt}[2]{
+  \heading{\textit{#1}}{\textit{#2}}
+}
+
+\newenvironment{resume_list}{
+  \vspace{-7pt}
+  \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=30pt]
+}{
+  \end{itemize}
+}
+
+\newcommand{\itemTitle}[1]{
+  \item[] \underline{#1}\vspace{4pt}
+}
+
+\renewcommand\labelitemi{--}
+
+%===================%
+% Luca Tomei Resume %
+%===================%
+
+\begin{document}
+
+  %---------%
+  % Heading %
+  %---------%
+
+  \documentTitle{Luca Tomei}{
+    \href{tel:+393505613338}{
+      \raisebox{-0.05\height} \faPhone\ +39 350 561 3338} ~ | ~
+    \href{mailto:luca.tom1995@gmail.com}{
+      \raisebox{-0.15\height} \faEnvelope\ luca.tom1995@gmail.com} ~ | ~
+    \href{https://lucatomei.github.io}{
+      \raisebox{-0.15\height} \faGlobe\ lucatomei.github.io} ~ | ~
+    \href{https://linkedin.com/in/TomeiLuca}{
+      \raisebox{-0.15\height} \faLinkedin\ linkedin.com/in/TomeiLuca} ~ | ~
+    \href{https://github.com/LucaTomei}{
+      \raisebox{-0.15\height} \faGithub\ github.com/LucaTomei}
+  }
+
+  %---------%
+  % Summary %
+  %---------%
+
+  \tinysection{Professional Profile}
+  Computer Engineer with experience in software development, implementation, and maintenance of ERP systems. Specialized in technical analysis, bug resolution, and system integration. Strong skills in Python, Java programming, and web development. Continuously updating professional expertise with numerous certifications in IT, artificial intelligence, and agile methodologies. Seeking a dynamic organization where I can solve complex IT challenges and contribute to the welfare of society.
+
+  %--------%
+  % Skills %
+  %--------%
+
+  \section{Technical Skills}
+
+  \begin{multicols}{2}
+    \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=75pt]
+      \item[\textbf{Languages}] C#, Python, Java, C/C++, SQL, JavaScript, PHP, Swift, Kotlin
+      \item[\textbf{Frameworks}] Angular, React, React Native, Node.js
+      \item[\textbf{Databases}] SQL Server, PostgreSQL, MongoDB
+      \item[\textbf{DevOps}] Git, Docker, Linux, CI/CD
+      \item[\textbf{Cloud}] AWS, Azure, IBM Cloud
+      \item[\textbf{ERP}] ERP Business Engine, System Integration
+      \item[\textbf{Design}] Autodesk Fusion 360, AutoCAD
+      \item[\textbf{Low-Code}] OutSystems, Databricks
+    \end{itemize}
+  \end{multicols}
+
+  %------------%
+  % Experience %
+  %------------%
+
+  \section{Professional Experience}
+
+  \headingBf{Yokohama TWS}{May 2023 -- Present}
+  \headingIt{IT Development Advisor}{Tivoli (Rome), Italy}
+  \begin{resume_list}
+    \item Responsible for driving technical analysis, development, and implementation of custom IT solutions, including ERP systems and Low-code Applications
+    \item Design, develop, and maintain scalable and high-performance applications using agile methodologies
+    \item Coordinate successful implementation of new IT solutions in line with agreed expectations
+    \item Manage outsourced development projects, coordinating with external consultants
+    \item Define software development strategies and best practices aligned with business objectives
+    \item Collaborate with cross-functional teams to translate business requirements into technical specifications
+    \item Provide technical leadership to development team, ensuring code quality and performance
+    \item Perform code reviews and ensure technical documentation is up to date
+    \item Troubleshoot and resolve issues and bugs in applications in a timely manner
+  \end{resume_list}
+
+  \headingBf{Trelleborg Wheels System}{November 2021 -- May 2023}
+  \headingIt{ERP Developer}{Tivoli (Rome), Italy}
+  \begin{resume_list}
+    \item Analyzed functional documentation and created technical documentation
+    \item Identified and fixed bugs in ERP systems
+    \item Managed ERP technical systems: Business Engine, interfaces, layouts, reports
+    \item Integrated ERP system with other business systems
+    \item Maintained ERP versions updated according to vendor releases
+    \item Supported business for ERP technical issues
+    \item Collaborated with ERP technical consultants for complex implementations
+  \end{resume_list}
+
+  \headingBf{Freelance}{November 2015 -- Present}
+  \headingIt{Technical Installer and Maintenance Specialist}{Rome, Italy}
+  \begin{resume_list}
+    \item Installed home automation systems for private homes and commercial spaces
+    \item Installed and maintained electronic components and control systems
+    \item Maintained air conditioning, heating, and electrical systems
+    \item Developed databases for business data administration and management
+    \item Provided technical support and consulting for system optimization
+  \end{resume_list}
+
+  %-----------%
+  % Education %
+  %-----------%
+    \newpage
+  \section{Education}
+
+  \headingBf{Sapienza University of Rome}{January 2020 -- October 2021}
+  \headingIt{Master's Degree in Engineering in Computer Science}{110/110}
+  \begin{resume_list}
+    \item \textbf{Thesis}: "Design and proof-of-concept of the integration of an electric scooter with a wheelchair: from the mechanical design to the firmware upgrade"
+    \item Developed Python client application and custom firmware for electric scooters
+    \item Created acceleration algorithm for electric vehicles
+    \item Designed 3D bracket to connect electric scooter and wheelchair
+    \item Implemented graphical interface for firmware creation automation
+  \end{resume_list}
+
+  \headingBf{Sapienza University of Rome}{2016 -- 2019}
+  \headingIt{Bachelor's Degree in Computer and Automation Engineering}{99/110}
+  \begin{resume_list}
+    \item \textbf{Thesis}: "Mapping Management of an Ontology-based Data Access System"
+    \item Developed Java and React server application
+    \item Designed and implemented user-friendly graphical interface
+    \item Developed Java code for control logic and ontology management
+    \item Implemented query system directly from browser
+  \end{resume_list}
+
+  \headingBf{Ettore Majorana Scientific High School}{2009 -- 2014}
+  \headingIt{Scientific High School Diploma}{Guidonia, Italy}
+
+  \section{Certifications}
+  
+  \headingBf{Key Certifications}{}
+  \begin{resume_list}
+    \item \textbf{Outsystems Associate Reactive Developer} - OutSystems (2024)
+    \item \textbf{Academy Accreditation - Databricks Lakehouse Fundamentals} - Databricks (2022)
+    \item \textbf{Introducing Semantic Kernel: Building AI-Based Apps} - LinkedIn (2024)
+    \item \textbf{Software Architecture Fundamentals} - Birdify - LMSAFP (2024)
+    \item \textbf{Artificial Intelligence Fundamentals: Machine Learning} - Birdify (2024)
+    \item \textbf{Java/Python/React (Basic)} - HackerRank (2021)
+    \item \textbf{Rest API (Intermediate)} - HackerRank (2021)
+    \item \textbf{SQL (Basic \& Intermediate)} - HackerRank (2021)
+    \item \textbf{Introduction to iOS Mobile Application Development} - Meta, Coursera (2023)
+    \item \textbf{Introduction to Cloud Computing} - IBM, Coursera (2022)
+    \item \textbf{Introduction to Cybersecurity Tools} - IBM, Coursera (2022)
+    \item \textbf{Foundations of User Experience (UX) Design} - Google, Coursera (2022)
+    \item \textbf{Introduction to Data Analytics} - IBM, Coursera (2022)
+    \item \textbf{Crash Course on Python} - Google, Coursera
+  \end{resume_list}
+
+  \section{Projects}
+
+  \headingBf{LazioHealthMonitorBot}{2024 -- Present}
+  \begin{resume_list}
+    \item Created a Telegram bot for monitoring National Health System appointment availability in Lazio region
+    \item Developed real-time notification system for new hospital appointment slots
+    \item Implemented continuous monitoring (every 5 minutes) of availabilities
+    \item Designed intuitive user interface with custom Telegram keyboard
+    \item Built multi-user system to support families or groups
+    \item Tech stack: Python, Telegram Bot API, REST API, JSON
+    \item Open source project available on GitHub (\href{https://github.com/LucaTomei/LazioHealthMonitorBot}{github.com/LucaTomei/LazioHealthMonitorBot})
+  \end{resume_list}
+
+  \headingBf{Electric Scooter Wheelchair}{2020 -- 2021}
+  \begin{resume_list}
+    \item Designed and developed a system to integrate electric scooter with wheelchair
+    \item Created custom firmware to improve performance and safety
+    \item Developed algorithms to optimize acceleration and braking
+    \item 3D modeled connection components between the two vehicles
+    \item Implemented software interface for system control
+  \end{resume_list}
+
+  \headingBf{Open Source Projects}{2016 -- Present}
+  \begin{resume_list}
+    \item \textbf{Monolith}: Ontology-based data access system
+    \item \textbf{ColliGO}: Solution to reduce queues and increase safety
+    \item \textbf{MAXG30CFW}: Firmware creator for Ninebot electric scooter
+    \item \textbf{RemindMe}: Tools Installer for Ubuntu environment
+    \item \textbf{GL.iNet-VpnSwitcher-OpenWrt}: Automated VPN switch system
+    \item \textbf{Hoodie-MusicDownloader}: Music download tool
+    \item \textbf{Esp32-Cam-PIR-Telegram}: Surveillance system with Telegram notifications
+  \end{resume_list}
+
+  %---------%
+  % Lingue  %
+  %---------%
+    \newpage
+  \section{Languages}
+  
+  \begin{multicols}{3}
+    \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=50pt]
+      \item[\textbf{Italian}] Native
+      \item[\textbf{English}] Advanced
+      \item[\textbf{French}] Intermediate
+    \end{itemize}
+  \end{multicols}
+
+  \vspace{50pt}
 
 
-\cvsection{University Projects}
-\begin{itemize}
-\item Monolith (Ontology Based Data Access).
-\item LighTextEditor (OS Project).
-\item Domestic appliances RCNN.
-\item \href{https://github.com/LucaTomei/osProject}{Operating Systems Project - Text Editor}
-\item MultiutilityLucaVal 
-\item \href{https://github.com/LucaTomei/monolith}{Monolith}
-\item\href{https://github.com/LucaTomei/Algorithm_Design_HW}{Algorithm Design HW}
-\item \href{https://github.com/LucaTomei/Reti-di-Calcolatori---Colligo-Telegram-Bot}{Colligo Telegram Bot}
-\item \href{https://github.com/LucaTomei/HCI_Project}{Human Computer Interaction Project}
-\item Automatic water level detection and controller Using AT89C51 by C language code.
-\item \href{https://github.com/LucaTomei/Computer_Scientists}{Computer Scientists Retrieval}
-\item \href{https://github.com/LucaTomei/Electric-Scooter-Wheelchair}{Electric Scooter Wheelchair}
-\item \href{https://github.com/LucaTomei/NN-Project}{Neural Network Project}
-\end{itemize}
+{\footnotesize\textit{I authorize the processing of personal data in accordance with current legislation on the protection of personal data and, in particular, the European Regulation for the Protection of Personal Data 2016/679, Legislative Decree No. 196 of 30/06/2003 and subsequent amendments and additions.}}
 
-\divider
-
-\cvsection{My Projects}
-\begin{itemize}
-    \item \href{https://github.com/andreavitaletti/ColliGo}{ColliGO}: riduciamo la fila, aumentiamo la sicurezza
-	\item \href{https://github.com/LucaTomei/Parallels-Tools-Linux-kernel-5.0}{Parallels Tools Upgrade For Linux kernel 5.0}
-	\item \href{https://github.com/LucaTomei/Window_Movener}{Window Movener: Move Linux windows in Python}
-	\item Telegram Bot For Utilities and Fun
-	\item Spotify and Deezer Music Downloader 
-	\item \href{https://github.com/LucaTomei/RemindMe}{RemindMe: Tools Installer for Ubuntu environment}
-	\item \href{https://github.com/LucaTomei/Terminal-Apple-Watch-4-Clock-Face-}{Terminal Apple Watch 4 Clock Face}
-	\item \href{https://github.com/LucaTomei/GL.iNet-VpnSwitcher-OpenWrt}{GL.iNet-Vpn-Switcher OpenWrt}
-	\item \href{https://github.com/LucaTomei/Hoodie-MusicDownloader}{Hoodie - MusicDownloader}
-	\item \href{https://github.com/LucaTomei/Esp32-Cam-PIR-Telegram}{Esp32 Cam PIR Telegram}
-	\item \href{https://github.com/LucaTomei/FlyingBear-Gost-5}{FlyingBear Gost 5}
-	\item \href{https://github.com/LucaTomei/MAXG30CFW}{Ninebot kickscooter max g30 firmware creator}
-	\item \href{https://github.com/LucaTomei/Slides_to_Notability}{Slides to Notability}
-\end{itemize}
-
-%\divider
-
-\cvsection[page2sidebar]{Dissertation Work}
-\cvevent{Master Thesis in Engineering in Computer Science}{Design and proof-of-concept of the  integration of an electric scooter with a wheelchair: from the mechanical design to the firmware upgrade}{2020/01/01 - 2021/10/20}{110/110}
-\begin{itemize}
-\item Python client application
-\item Creation of custom firmware for electric scooter
-\item Creation of acceleration algorithm for an electric vehicle
-\item Drawing and 3D design of a bracket that allows to couple an electric scooter to a wheelchair for disabled people
-\item Graphic interface to automate the process of creating a custom firmware for an electric scooter
-\item Encryption/Decryption of binary files and modification of parameters
-\end{itemize}
-
-\divider
-
-\cvevent{BSc Thesis in Computer and Automatic Engineering}{Mapping management of an Ontology-based data access system}{2017/09/15 - 2019/12/16}{99/110}
-\begin{itemize}
-\item React and Java Server Application.
-\item Modify existing graphical interface to make it User Frendly.
-\item Developed JAVA language Code for control logic and Ontologies.
-\item Designed and developed the creation of Complex Mappings. 
-\item Designed and developed the ability to make query directly from a browser.
-\item Management of insertion and creation of mapping
-\item Added Mapping Editor
-\end{itemize}
-
-
-
-
-%\newpage
-%\divider
-%\divider
-%\divider
-
-
-\cvsection{Work Experience}
-\cvevent{IT Development Specialist - Yokohama TWS}{Technical analysis, implementation and maintenance of the ERP}{May 1 2023 - Now}{Tivoli (RM), Italy}
-\begin{itemize}
-\item Analysing the functional documentation and moving the requirement to the technical documentation of the software.
-\item Identify and correct bugs in the ERP system.
-\item Manage the ERP technical systems: Business Engine, interface, layout, reports, integration with other systems.
-\item Keeping the ERP system aligned with the latest versions released by the software company.
-\item Maintain alignment of technical documentation for all change requests and distributed changes.
-\item Support the business on ERP technical issues.
-\item Support the ERP technical consultant
-\end{itemize}
-
-\divider
-
-\cvevent{ERP Developer - Trelleborg Wheels System}{Technical analysis, implementation and maintenance of the ERP}{Nov 5 2021 - May 1 2023}{Tivoli (RM), Italy}
-\begin{itemize}
-\item Analysing the functional documentation and moving the requirement to the technical documentation of the software.
-\item Identify and correct bugs in the ERP system.
-\item Manage the ERP technical systems: Business Engine, interface, layout, reports, integration with other systems.
-\item Keeping the ERP system aligned with the latest versions released by the software company.
-\item Maintain alignment of technical documentation for all change requests and distributed changes.
-\item Support the business on ERP technical issues.
-\item Support the ERP technical consultant
-\end{itemize}
-
-\divider
-%\cvevent{Freelance Hardware Repair \& Maintenance}{Repair and rollout of Smartphones, Tablets, Pc and OS systems}{July 2014 - Present}{Rome, Italy}
-
-%\divider
-
-\cvevent{Installer and Maintenance Technician}{Electonic Installation Maintenance
-}{Nov 2015 - Present}{Rome, Italy}
-\begin{itemize}
-\item Home automation systems installation.
-\item Installation and maintenance of electronic components.
-\item Maintenance of air conditioning and heating equipment.
-\item Electrical system maintenance.
-\item Creation of a database for data administration of the company where I work.
-\end{itemize}
-
-%\divider
-
-%\cvevent{Freelance Website Designer \& Applications Maker}{Creation of websites and applications for mobile devices by request}{July 2016 - Present}{Rome, Italy}
-%Main used Languages:
-%\begin{itemize}
-%\item Swift
-%\item HTML + CSS + JS
-%\item PHP + SQL	
-%\end{itemize}
-
-
-
-% \cvsection{Certificates}
-
-% \begin{itemize}
-% \item Presented my research work in Symposium on "\textbf{Advances in Nuclear Engineering}" at Pakistan Institute of Engineering \& Applied Sciences, Islamabad, Pakistan.
-% \item Participated in "\textbf{Workshop on Plasma Physics-2015}" at National Centre for Physics, Islamabad, Pakistan.
-% \item Attended and successfully completed a four weeks course on "\textbf{Spoken English}" at University of Engineering \& Technology Lahore, Pakistan.
-% \item Participated in "\textbf{Student Professional Awareness Conference}" at University of Engineering \& Technology Lahore, Pakistan.
-% \end{itemize}
-
-
-\clearpage
-
-
+\vspace{5pt}
+\centering\includegraphics[width=.3\textwidth]{Mia Firma.png}}}
 
 \end{document}
