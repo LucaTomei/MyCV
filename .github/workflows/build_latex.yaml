@@ -46,5 +46,5 @@ jobs:
         with:
           name: CVE_PDFs
           path: |
-            CV_EN.pdf
-            CV_IT.pdf
+            CVE_EN_LucaTomei_2025.pdf
+            CVE_IT_LucaTomei_2025.pdf
