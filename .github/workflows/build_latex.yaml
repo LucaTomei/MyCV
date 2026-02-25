@@ -3,48 +3,87 @@ name: Build LaTeX Documents
 on:
   push:
     branches:
-      - main  # Specifica i rami che preferisci
+      - main
+      - master
+    # Evita loop: quando il workflow committa i PDF in dist/, non si rilancia
+    paths-ignore:
+      - "dist/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-latex-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build_latex:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout del repository
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      # Step 2: Installare LaTeX e Biber
-      - name: Install LaTeX and Biber
+      # Cache dei pacchetti APT + TeXLive (accelera parecchio dopo il primo run)
+      - name: Cache APT
+        uses: actions/cache@v4
+        with:
+          path: |
+            /var/cache/apt/archives
+            /var/lib/apt/lists
+          key: apt-${{ runner.os }}-texlive-v1
+
+      # Installa solo il necessario (molto più veloce di texlive-full)
+      - name: Install LaTeX + tools (minimal)
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-full biber
+          sudo apt-get install -y --no-install-recommends \
+            latexmk \
+            biber \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-bibtex-extra \
+            texlive-lang-english \
+            texlive-lang-italian \
+            texlive-pictures \
+            texlive-science \
+            texlive-extra-utils \
+            lmodern \
+            ghostscript
 
-      # Step 5: Compilare il CV in Inglese
       - name: Compile CV-EN
+        working-directory: CV-EN
         run: |
-          cd CV-EN
-          latexmk -pdf -shell-escape main.tex
+          latexmk -pdf -shell-escape -interaction=nonstopmode -halt-on-error main.tex
 
-      # Step 6: Rinomina il PDF del CV in Inglese
-      - name: Rename CV-EN PDF
-        run: mv CV-EN/main.pdf CVE_EN_LucaTomei_2025.pdf
-
-      # Step 7: Compilare il CV in Italiano
       - name: Compile CV-IT
+        working-directory: CV-IT
         run: |
-          cd CV-IT
-          latexmk -pdf -shell-escape main.tex
+          latexmk -pdf -shell-escape -interaction=nonstopmode -halt-on-error main.tex
 
-      # Step 8: Rinomina il PDF del CV in Italiano
-      - name: Rename CV-IT PDF
-        run: mv CV-IT/main.pdf CVE_IT_LucaTomei_2025.pdf
+      - name: Prepare dist/
+        run: |
+          mkdir -p dist
+          mv CV-EN/main.pdf dist/CVE_EN_LucaTomei_2025.pdf
+          mv CV-IT/main.pdf dist/CVE_IT_LucaTomei_2025.pdf
 
-      # Step 9: Caricare entrambi i PDF come artifact
-      - name: Upload PDF files
-        uses: actions/upload-artifact@v4
-        with:
-          name: CVE_PDFs
-          path: |
-            CVE_EN_LucaTomei_2025.pdf
-            CVE_IT_LucaTomei_2025.pdf
+      - name: Commit & push PDFs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add dist/*.pdf
+
+          # Se non ci sono differenze (PDF identici), esci pulito
+          if git diff --cached --quiet; then
+            echo "No PDF changes to commit"
+            exit 0
+          fi
+
+          git commit -m "chore(cv): update generated PDFs"
+          git push
