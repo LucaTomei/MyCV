@@ -1,0 +1,61 @@
+name: Release CVs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "CV-IT/**"
+      - "CV-EN/**"
+      - ".github/workflows/release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile Italian CV
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: CV-IT
+
+      - name: Compile English CV
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: CV-EN
+
+      - name: Collect PDFs
+        run: |
+          mkdir -p out
+          cp CV-IT/main.pdf out/CVE_IT_LucaTomei.pdf
+          cp CV-EN/main.pdf out/CVE_EN_LucaTomei.pdf
+
+      - name: Update dist copies
+        run: |
+          rm -f dist/*.pdf
+          cp out/CVE_IT_LucaTomei.pdf dist/
+          cp out/CVE_EN_LucaTomei.pdf dist/
+          if ! git diff --quiet -- dist; then
+            git config user.name "LucaTomei"
+            git config user.email "46397302+LucaTomei@users.noreply.github.com"
+            git add dist
+            git commit -m "Update compiled CVs"
+            git push
+          fi
+
+      - name: Publish rolling release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Curriculum Vitae
+          body: |
+            CV compilati automaticamente dall'ultima versione dei sorgenti LaTeX.
+            - `CVE_IT_LucaTomei.pdf` — versione italiana
+            - `CVE_EN_LucaTomei.pdf` — versione inglese
+          files: out/*.pdf
