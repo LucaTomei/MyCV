@@ -28,7 +28,7 @@
 
 % Source Sans Pro: modern, compact, Type 1 with T1 encoding (parser-safe)
 \usepackage[default,semibold]{sourcesanspro}
-\usepackage[a4paper,top=0.8cm,bottom=0.8cm,left=1.15cm,right=1.15cm]{geometry}
+\usepackage[a4paper,top=1.3cm,bottom=0.8cm,left=1.15cm,right=1.15cm]{geometry}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{titlesec}
@@ -93,12 +93,17 @@
 
 % \cvheader{Name}{Headline}{Contact line}
 % Photo on the right; every contact item is plain text (links still clickable).
+% Name and headline above the rule; contact details BELOW it, inside the
+% document body: some parsers treat everything above the first full-width
+% rule near the top edge as a page header and drop it.
 \newcommand{\cvheadertext}[3]{%
   {\fontsize{26}{28}\selectfont\bfseries\color{accent}#1}\par
   \vspace{3pt}
   {\large\color{muted}#2}\par
   \vspace{5pt}
-  {\small\color{muted}#3}\par
+  {\color{accent}\hrule height 1pt}\par
+  \vspace{4pt}
+  {\small #3}\par
 }
 \makeatletter
 \newcommand{\cvheader}[3]{%
@@ -107,16 +112,15 @@
   % table (Jobscan-style tools drop contact details when they do).
   \ifcvphoto
     \begin{picture}(0,0)
-      \put(\strip@pt\textwidth,-46){\llap{\includegraphics[height=66pt]{common/foto.jpg}}}
+      \put(\strip@pt\textwidth,-52){\llap{\includegraphics[height=72pt]{common/foto.jpg}}}
     \end{picture}%
   \fi
   \cvheadertext{#1}{#2}{#3}
-  \vspace{5pt}
-  {\color{accent}\hrule height 1pt}
 }
 \makeatother
 \newcommand{\cvsep}{~\textperiodcentered~}
-\newcommand{\cvbar}{~|~}   % contact separator: the form parsers expect
+\newcommand{\cvbar}{~~|~~}  % contact separator
+\newcommand{\cvlabel}[1]{{\color{muted}#1}~}
 
 % ---- Entries ---------------------------------------------------------------
 % \cventry{Title}{Dates}{Organisation}{Location}
