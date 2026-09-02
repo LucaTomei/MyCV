@@ -1,323 +1,158 @@
-%%%%
-% CV di Luca Tomei
-%%%%
+%% Luca Tomei - Curriculum Vitae (italiano)
+%% Compilazione dalla radice del repository:  latexmk -pdf -outdir=build/it CV-IT/main.tex
+\documentclass[a4paper,10pt]{article}
 
-\documentclass[letterpaper,10pt]{article}
+\newcommand{\cvlang}{it-IT}
+\newcommand{\cvpdftitle}{Luca Tomei - Curriculum Vitae}
+\newcommand{\cvpdfsubject}{Software Engineer - IT Development Advisor - Integrazione enterprise, .NET, Angular, Infor M3}
+\newcommand{\cvpdfkeywords}{Luca Tomei, Software Engineer, IT Development Advisor, Sviluppatore Full-Stack, Integrazione ERP, Infor M3, Infor ION, MEC, ESB, .NET 8, C\#, Angular, TypeScript, SQL Server, Azure DevOps, CI/CD, Docker, Microservizi, REST API, OutSystems, Python, Roma, Italia}
 
-% Dependencies
-\usepackage[empty]{fullpage}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\usepackage{fancyhdr}
-\usepackage{fontawesome5}
-\usepackage{multicol}
-\usepackage{bookmark}
-\usepackage{lastpage}
-\usepackage{graphicx}
-
-% Serif
-\usepackage{CormorantGaramond}
-\usepackage{charter}
-
-% Colors
-\usepackage{xcolor}
-\definecolor{accentTitle}{HTML}{008080}
-\definecolor{accentText}{HTML}{008080}
-\definecolor{accentLine}{HTML}{666666}
-
-% Misc. Options
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\urlstyle{same}
-
-% Adjust Margins
-\addtolength{\oddsidemargin}{-0.7in}
-\addtolength{\evensidemargin}{-0.5in}
-\addtolength{\textwidth}{1.19in}
-\addtolength{\topmargin}{-0.7in}
-\addtolength{\textheight}{1.4in}
-
-\setlength{\multicolsep}{-3.0pt}
-\setlength{\columnsep}{-1pt}
-\setlength{\tabcolsep}{0pt}
-\setlength{\footskip}{3.7pt}
-\raggedbottom
-\raggedright
-
-% ATS Readability
-\input{glyphtounicode}
-\pdfgentounicode=1
-
-%-----------------%
-% Custom Commands %
-%-----------------%
-
-\newcommand{\documentTitle}[2]{
-  \begin{center}
-    \begin{minipage}{0.85\textwidth}
-      {\Huge\color{accentTitle} #1}
-    \end{minipage}
-    \begin{minipage}{0.12\textwidth}
-      \includegraphics[width=\textwidth]{foto.jpg}
-    \end{minipage}\\[5pt]
-    {\color{accentLine} \hrule}
-    \vspace{2pt}
-    \footnotesize{#2}
-    \vspace{2pt}
-    {\color{accentLine} \hrule}
-  \end{center}
-}
-
-\newcommand{\documentFooter}[1]{
-  \setlength{\footskip}{10.25pt}
-  \fancyfoot[C]{\footnotesize #1}
-}
-
-\titleformat{\section}{
-  \vspace{-5pt}
-  \color{accentText}
-  \raggedright\large\bfseries
-}{}{0em}{}[\color{accentLine}\titlerule]
-
-\newcommand{\tinysection}[1]{
-  \phantomsection
-  \addcontentsline{toc}{section}{#1}
-  {\large{\bfseries\color{accentText}#1} {\color{accentLine} |}}
-}
-
-\newcommand{\heading}[2]{
-  \hspace{10pt}#1\hfill#2\\
-}
-
-\newcommand{\headingBf}[2]{
-  \heading{\textbf{#1}}{\textbf{#2}}
-}
-
-\newcommand{\headingIt}[2]{
-  \heading{\textit{#1}}{\textit{#2}}
-}
-
-\newenvironment{resume_list}{
-  \vspace{-7pt}
-  \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=30pt]
-}{
-  \end{itemize}
-}
-
-\newcommand{\itemTitle}[1]{
-  \item[] \underline{#1}\vspace{4pt}
-}
-
-\renewcommand\labelitemi{--}
-
-%===================%
-% Luca Tomei Resume %
-%===================%
+\input{common/preamble}
+\usepackage[italian]{babel}
 
 \begin{document}
 
-  %---------%
-  % Heading %
-  %---------%
+\cvheader{Luca Tomei}{Software Engineer \cvsep\ IT Development Advisor}{%
+  Roma, Italia \cvsep\
+  \href{tel:+393505613338}{+39 350 561 3338} \cvsep\
+  \href{mailto:luca.tom1995@gmail.com}{luca.tom1995@gmail.com} \cvsep\
+  \href{https://lucasmac.xyz}{lucasmac.xyz} \cvsep\
+  \href{https://www.linkedin.com/in/tomeiluca/}{linkedin.com/in/tomeiluca} \cvsep\
+  \href{https://github.com/LucaTomei}{github.com/LucaTomei}%
+}
 
-  \documentTitle{Luca Tomei}{
-    \href{tel:+393505613338}{
-      \raisebox{-0.05\height} \faPhone\ +39 350 561 3338} ~ | ~
-    \href{mailto:luca.tom1995@gmail.com}{
-      \raisebox{-0.15\height} \faEnvelope\ luca.tom1995@gmail.com} ~ | ~
-    \href{https://lucatomei.github.io}{
-      \raisebox{-0.15\height} \faGlobe\ lucatomei.github.io} ~ | ~
-    \href{https://linkedin.com/in/TomeiLuca}{
-      \raisebox{-0.15\height} \faLinkedin\ linkedin.com/in/TomeiLuca} ~ | ~
-    \href{https://github.com/LucaTomei}{
-      \raisebox{-0.15\height} \faGithub\ github.com/LucaTomei}
-  }
+%% ---------------------------------------------------------------- Profilo
+\section{Profilo professionale}
+Software Engineer (Laurea Magistrale in Engineering in Computer Science, Sapienza Università di Roma), dal 2021 su sistemi enterprise: sviluppo full-stack con .NET 8, Angular e SQL Server, integrazione ERP su Infor M3 (on-premise e cloud) tramite middleware ION, MEC ed ESB, microservizi, REST API e low-code su OutSystems. Attualmente IT Development Advisor in Yokohama TWS: definisco gli standard di sviluppo, governo la strategia CI/CD e di containerizzazione e coordino team interni, consulenti e partner 3PL. Ownership end-to-end, dall'analisi dei requisiti al deployment e al supporto. Fuori dal lavoro sviluppo progetti open source di automazione, embedded e NFC.
 
-  %---------%
-  % Summary %
-  %---------%
+%% ------------------------------------------------------------- Competenze
+\section{Competenze tecniche}
+\cvskill{Linguaggi}{C\#, Python, TypeScript, JavaScript, Java, SQL, PHP, C/C++, Scala, Swift, Kotlin, PowerShell}
+\cvskill{Backend e API}{.NET 8, Laravel, Node.js, REST API, Microservizi, RabbitMQ, XSD/XML, JSON}
+\cvskill{Frontend e Mobile}{Angular, Vue.js, React, React Native, SwiftUI}
+\cvskill{ERP e Integrazione}{Infor M3 (on-premise e cloud), Infor ION, MEC, ESB, integrazioni 3PL, OutSystems}
+\cvskill{Database e Dati}{SQL Server, MySQL, PostgreSQL, MongoDB, SQLite, Databricks}
+\cvskill{DevOps e Cloud}{Azure DevOps, GitHub Actions, CI/CD, Docker, Linux, IIS, Proxmox, Cloudflare, Azure}
+\cvskill{IoT ed Embedded}{ESP32, MQTT, NFC, Flipper Zero, Home Assistant, Node-RED, reverse engineering di firmware}
+\cvskill{Design e CAD}{Autodesk Fusion 360, AutoCAD, stampa 3D}
 
-  \tinysection{Profilo Professionale}
-  Ingegnere Informatico con solida esperienza nello sviluppo full-stack (.NET 8, Angular, SQL Server), integrazione ERP enterprise (Infor M3 on-premise e cloud) e architetture a microservizi. Specializzato nella progettazione di flussi di integrazione enterprise (MEC, ESB, 3PL) con REST API e XSD/XML, e nello sviluppo low-code con OutSystems. Competente in ambienti containerizzati (Docker), pipeline CI/CD su Azure DevOps e gestione di database. Orientato al dettaglio con mentalità production-grade e forte ownership sulla delivery end-to-end — dall'analisi al deployment e al supporto. In continuo aggiornamento con certificazioni in ambito IT, intelligenza artificiale e metodologie agili.
+%% ------------------------------------------------------------- Esperienza
+\section{Esperienza professionale}
 
-  %--------%
-  % Skills %
-  %--------%
+\cventry{IT Development Advisor}{Febbraio 2026 -- Presente}{Yokohama TWS (già Trelleborg Wheel Systems)}{Tivoli (Roma), Italia}
+\begin{cvitems}
+  \item Definizione della strategia di sviluppo software e delle best practice, governando l'adozione di microservizi, pipeline CI/CD su Azure DevOps e deployment basati su Docker
+  \item Leadership tecnica su qualità e prestazioni del codice negli stack .NET 8, Angular e SQL Server
+  \item Progettazione e governo dell'orchestrazione API enterprise tra microservizi e sistemi legacy tramite middleware Infor ION, MEC ed ESB
+  \item Coordinamento della migrazione cloud di Infor M3 e del rollout di applicazioni low-code OutSystems allineate ai requisiti di business
+  \item Gestione di progetti in outsourcing, allineando consulenti esterni e partner 3PL agli standard aziendali; traduzione dei requisiti di business in specifiche tecniche documentate
+\end{cvitems}
 
-  \section{Competenze Tecniche}
+\cvsub{IT Development Specialist}{Maggio 2023 -- Febbraio 2026}
+\begin{cvitems}
+  \item Analisi tecnica, sviluppo e implementazione di soluzioni custom su ERP Infor M3 (on-premise) e piattaforma low-code OutSystems
+  \item Sviluppo di REST API e microservizi backend in C\#/.NET integrati con dashboard enterprise Angular e database SQL Server
+  \item Progettazione e manutenzione di flussi di integrazione enterprise (MEC, ESB, 3PL) con design di schemi XSD/XML e data mapping; troubleshooting dei documenti inbound/outbound con i partner logistici esterni
+  \item Implementazione e manutenzione di pipeline CI/CD su Azure DevOps per il deployment automatico di frontend, backend e database
+  \item Code review, root cause analysis e manutenzione di documentazione tecnica e runbook
+\end{cvitems}
+\cvstack{Stack}{.NET 8, C\#, Angular, TypeScript, SQL Server, MySQL, PHP/Laravel, Vue.js, RabbitMQ, Infor M3, Infor ION, MEC, ESB, OutSystems, Azure DevOps, Docker, IIS}
 
-  \begin{multicols}{2}
-    \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=85pt]
-      \item[\textbf{Linguaggi}] C\#, Python, Java, C/C++, SQL, JavaScript, PowerShell, VBA, PHP
-      \item[\textbf{Framework}] Angular, .NET 8, React, React Native, Node.js
-      \item[\textbf{Database}] SQL Server, PostgreSQL, MongoDB
-      \item[\textbf{DevOps}] Azure DevOps, Git, Docker, CI/CD, IIS, Linux
-      \item[\textbf{Cloud}] Azure, AWS, IBM Cloud
-      \item[\textbf{ERP}] Infor M3 (On-Prem \& Cloud), MEC, ESB
-      \item[\textbf{Integrazione}] REST API, Microservizi, XSD/XML, 3PL
-      \item[\textbf{Low-Code}] OutSystems, Databricks
-      \item[\textbf{IoT e Embedded}] Node-RED, Home Assistant, MQTT, NFC
-      \item[\textbf{Design}] Autodesk Fusion 360, AutoCAD
-    \end{itemize}
-  \end{multicols}
+\cventry{ERP Developer}{Novembre 2021 -- Maggio 2023}{Trelleborg Wheel Systems}{Tivoli (Roma), Italia}
+\begin{cvitems}
+  \item Gestione tecnica dell'ERP Infor M3 (Business Engine, interfacce, layout, report) e integrazione con gli altri sistemi aziendali
+  \item Analisi della documentazione funzionale, stesura della documentazione tecnica, bug fixing e allineamento delle versioni ERP alle release del vendor
+  \item Supporto al business sulle problematiche tecniche ERP e collaborazione con i consulenti del vendor per le implementazioni complesse
+\end{cvitems}
 
-  %------------%
-  % Experience %
-  %------------%
+\cventry{Assistente didattico, Programmazione Funzionale e Parallela}{Ottobre 2021 -- Dicembre 2021}{Sapienza Università di Roma}{Roma, Italia}
+\begin{cvitems}
+  \item Tutor della sezione online (circa 100 studenti) del corso in Scala tenuto dal Prof.\ Camil Demetrescu: laboratori, assignment di programmazione, quiz ed esami
+\end{cvitems}
 
-  \section{Esperienza Professionale}
+\cventry{Tecnico domotica e IT (freelance)}{Novembre 2015 -- Ottobre 2021}{Libero professionista}{Roma, Italia}
+\begin{cvitems}
+  \item Installazione e manutenzione di sistemi domotici e di controllo per abitazioni private e spazi commerciali; sviluppo di database per la gestione dei dati aziendali e consulenza tecnica
+\end{cvitems}
 
-  \headingBf{Yokohama TWS}{Maggio 2023 -- Presente}
-  \headingIt{IT Development Advisor}{Feb 2026 -- Presente $|$ Tivoli (RM), Italia}
-  \begin{resume_list}
-    \item Definizione di strategie di sviluppo software, governando l'adozione di architetture a microservizi, pipeline CI/CD su Azure DevOps e deployment containerizzati con Docker
-    \item Leadership tecnica al team di sviluppo, garantendo qualità del codice e prestazioni su stack .NET 8, Angular e SQL Server
-    \item Progettazione e governo dell'orchestrazione API tra microservizi e sistemi legacy tramite middleware MEC ed ESB
-    \item Coordinamento della migrazione cloud di Infor M3 e del rollout di applicazioni low-code OutSystems allineate ai requisiti aziendali
-    \item Gestione di progetti di sviluppo esternalizzati, allineando consulenti esterni e partner logistici (3PL) agli standard aziendali
-    \item Collaborazione con team interfunzionali per tradurre i requisiti di business in specifiche tecniche scalabili e documentate
-  \end{resume_list}
-  \headingIt{IT Development Specialist}{Maggio 2023 -- Feb 2026}
-  \begin{resume_list}
-    \item Guida dell'analisi tecnica, sviluppo e implementazione di soluzioni IT su Infor M3 ERP (on-premise) e piattaforma low-code OutSystems
-    \item Sviluppo di REST API e microservizi backend in C\#/.NET integrati con dashboard Angular e database SQL Server
-    \item Progettazione e manutenzione di flussi di integrazione enterprise (MEC, ESB, 3PL) con design e validazione di schemi XSD/XML basati su documenti di tracciabilità funzionale
-    \item Implementazione e manutenzione di pipeline CI/CD su Azure DevOps per deployment automatizzato di frontend, backend e database
-    \item Troubleshooting di documenti inbound/outbound attraverso i layer middleware MEC/ESB con partner logistici esterni
-    \item Esecuzione di code review, root cause analysis e manutenzione di documentazione tecnica e runbook
-  \end{resume_list}
+%% -------------------------------------------------------------- Formazione
+\section{Istruzione e formazione}
 
-  \headingBf{Trelleborg Wheels System}{Novembre 2021 -- Maggio 2023}
-  \headingIt{ERP Developer}{Tivoli (RM), Italia}
-  \begin{resume_list}
-    \item Analisi della documentazione funzionale e creazione documentazione tecnica
-    \item Identificazione e correzione bug nei sistemi ERP
-    \item Gestione dei sistemi tecnici ERP: Business Engine, interfacce, layout, report
-    \item Integrazione del sistema ERP con altri sistemi aziendali
-    \item Mantenimento delle versioni ERP aggiornate secondo rilasci dei fornitori
-    \item Supporto business per problematiche tecniche ERP
-    \item Collaborazione con consulenti tecnici ERP per implementazioni complesse
-  \end{resume_list}
+\cventry{Laurea Magistrale in Engineering in Computer Science \textendash\ 110/110}{Gennaio 2020 -- Ottobre 2021}{Sapienza Università di Roma}{Roma, Italia}
+\begin{cvitems}
+  \item Tesi: \textit{Design and proof-of-concept of the integration of an electric scooter with a wheelchair: from the mechanical design to the firmware upgrade} \textendash\ firmware custom con accelerazione adattiva, client Python/GUI per la generazione dei firmware, staffa progettata in 3D
+\end{cvitems}
 
-  \headingBf{Freelance}{Novembre 2015 -- Presente}
-  \headingIt{Tecnico installatore e manutentore}{Roma, Italia}
-  \begin{resume_list}
-    \item Installazione di sistemi domotici per abitazioni private e spazi commerciali
-    \item Installazione e manutenzione di componenti elettronici e sistemi di controllo
-    \item Manutenzione di impianti di condizionamento, riscaldamento ed elettrici
-    \item Sviluppo di database per l'amministrazione e gestione dei dati aziendali
-    \item Fornito supporto tecnico e consulenza per l'ottimizzazione dei sistemi
-  \end{resume_list}
+\cventry{Laurea in Ingegneria Informatica e Automatica \textendash\ 99/110}{2016 -- 2019}{Sapienza Università di Roma}{Roma, Italia}
+\begin{cvitems}
+  \item Tesi: \textit{Gestione di mapping di un sistema di accesso ai dati basato su ontologie} \textendash\ applicazione web Java e React per la gestione dei mapping e l'interrogazione di ontologie da browser
+\end{cvitems}
 
+\cvline{Diploma di Liceo Scientifico}{2009 -- 2014}{Liceo Scientifico Ettore Majorana, Guidonia (Roma)}
 
-\newpage
-  %-----------%
-  % Education %
-  %-----------%
+%% --------------------------------------------------------------- Progetti
+\section{Progetti}
 
-  \section{Formazione}
+\cvproject{Electric Scooter Wheelchair}{2020 -- 2021}{github.com/LucaTomei/Electric-Scooter-Wheelchair}
+\begin{cvitems}
+  \item Prototipo funzionante che accoppia un monopattino elettrico a una carrozzina: staffa progettata in CAD e stampata in 3D, firmware da reverse engineering con accelerazione e frenata tarate sul nuovo carico (tesi magistrale) (Python, firmware, Autodesk Fusion 360, stampa 3D)
+\end{cvitems}
 
-  \headingBf{Università di Roma la Sapienza}{Gennaio 2020 -- Ottobre 2021}
-  \headingIt{Laurea Magistrale in Engineering in Computer Science}{110/110}
-  \begin{resume_list}
-    \item \textbf{Tesi}: "Design and proof-of-concept of the integration of an electric scooter with a wheelchair: from the mechanical design to the firmware upgrade"
-    \item Sviluppo di applicazione client Python e custom firmware per monopattino elettrico
-    \item Creazione di algoritmo di accelerazione per veicoli elettrici
-    \item Progettazione 3D di staffa per accoppiare monopattino elettrico e carrozzina
-    \item Implementazione di interfaccia grafica per automazione creazione firmware
-  \end{resume_list}
+\cvproject{OPBG Telegram Booking Bot}{Progetto privato}{}
+\begin{cvitems}
+  \item Bot multi-utente su invito che automatizza il portale di prenotazione dell'Ospedale Pediatrico Bambino Gesù: ricerca per prestazione o medico, monitoraggio delle disponibilità con notifica o prenotazione automatica; processi bot e worker separati, protocollo di prenotazione idempotente, pannello admin (Python, aiogram, SQLAlchemy, MySQL, Docker)
+\end{cvitems}
 
-  \headingBf{Università di Roma la Sapienza}{2016 -- 2019}
-  \headingIt{Laurea Triennale in Ingegneria Informatica e Automatica}{99/110}
-  \begin{resume_list}
-    \item \textbf{Tesi}: "Gestione di Mapping di un sistema di accesso ai dati basato su Ontologie"
-    \item Sviluppo di applicazione server Java e React
-    \item Progettazione e implementazione interfaccia grafica user-friendly
-    \item Sviluppo di codice Java per logica di controllo e gestione ontologie
-    \item Implementazione di sistema di query direttamente da browser
-  \end{resume_list}
+\cvproject{Flipper Mi Band NFC Writer}{2025}{github.com/LucaTomei/flipper-miband-nfc-writer}
+\begin{cvitems}
+  \item App per Flipper Zero che legge, scrive, emula e verifica i dati NFC delle Xiaomi Mi Band: backup automatici, avanzamento per settore, diff esadecimale, impostazioni persistenti e log esportabili (C, Flipper Zero, NFC, MIFARE Classic)
+\end{cvitems}
 
-  \headingBf{Liceo Scientifico Ettore Majorana}{2009 -- 2014}
-  \headingIt{Diploma Liceo Scientifico}{Guidonia, Italia}
+\cvproject{Telegram Audio Transcriber}{2026}{github.com/LucaTomei/Telegram-Audio-Transcriber}
+\begin{cvitems}
+  \item Bot self-hosted che trascrive in locale messaggi vocali e file audio con modelli Whisper; pulizia opzionale del testo via endpoint compatibili OpenAI, whitelist e ruoli admin, nessuna persistenza dell'audio; deploy Docker Compose da immagini costruite in CI (Python, Faster-Whisper, ffmpeg, SQLAlchemy, Docker, GitHub Actions, GHCR)
+\end{cvitems}
 
-  \section{Certificazioni}
-  
-  \headingBf{Certificazioni Principali}{}
-  \begin{resume_list}
-    \item \textbf{Outsystems Associate Reactive Developer} - OutSystems (2024)
-    \item \textbf{Academy Accreditation - Databricks Lakehouse Fundamentals} - Databricks (2022)
-    \item \textbf{Introducing Semantic Kernel: Building AI-Based Apps} - LinkedIn (2024)
-    \item \textbf{Fondamenti di architettura software} - Birdify - LMSAFP (2024)
-    \item \textbf{Fondamenti di intelligenza artificiale: apprendimento automatico} - Birdify (2024)
-    \item \textbf{Java/Python/React (Basic)} - HackerRank (2021)
-    \item \textbf{Rest API (Intermediate)} - HackerRank (2021)
-    \item \textbf{SQL (Basic \& Intermediate)} - HackerRank (2021)
-    \item \textbf{Introduction to iOS Mobile Application Development} - Meta, Coursera (2023)
-    \item \textbf{Introduction to Cloud Computing} - IBM, Coursera (2022)
-    \item \textbf{Introduction to Cybersecurity Tools} - IBM, Coursera (2022)
-    \item \textbf{Foundations of User Experience (UX) Design} - Google, Coursera (2022)
-    \item \textbf{Introduction to Data Analytics} - IBM, Coursera (2022)
-    \item \textbf{Crash Course on Python} - Google, Coursera
-  \end{resume_list}
+\cvproject{LazioHealthMonitorBot}{2025 -- Presente}{github.com/LucaTomei/LazioHealthMonitorBot}
+\begin{cvitems}
+  \item Bot multi-utente che interroga ogni cinque minuti il servizio sanitario della Regione Lazio: notifiche in tempo reale, filtri per data, blacklist ospedali, prenotazione diretta o automatica del primo slot libero, conferme in PDF; validazione CI e immagini container a ogni release (Python, Telegram Bot API, REST, Docker, GitHub Actions, GHCR)
+\end{cvitems}
 
-  \section{Progetti}
+\cvproject{Carburanti Bot}{2026}{github.com/LucaTomei/Carburanti-Bot}
+\begin{cvitems}
+  \item Bot sui prezzi dei carburanti in Italia in tempo reale: stazione preferita, ricerca delle stazioni vicine e del miglior prezzo dalla posizione condivisa, notifiche giornaliere, interfaccia a tastiera e pannello admin (Python, Docker, Portainer, open data MIMIT/Osservaprezzi)
+\end{cvitems}
 
-  \headingBf{LazioHealthMonitorBot}{2024 -- Presente}
-  \begin{resume_list}
-    \item Creazione di un bot Telegram per il monitoraggio delle disponibilità di appuntamenti SSN nella regione Lazio
-    \item Sviluppo di sistema di notifiche in tempo reale per nuove disponibilità negli ospedali
-    \item Implementazione di monitoraggio continuo (ogni 5 minuti) delle disponibilità
-    \item Sviluppo di interfaccia utente intuitiva con tastiera personalizzata Telegram
-    \item Creazione di sistema multi-utente per supportare famiglie o gruppi
-    \item Stack tecnologico: Python, Telegram Bot API, API REST, JSON
-    \item Progetto open source disponibile su GitHub (\href{https://github.com/LucaTomei/LazioHealthMonitorBot}{github.com/LucaTomei/LazioHealthMonitorBot})
-  \end{resume_list}
+\cvproject{Estrai Allegati}{2026}{github.com/LucaTomei/estrai-allegati}
+\begin{cvitems}
+  \item App macOS nativa che estrae i file incorporati da documenti Word, Excel e PowerPoint: parser ZIP, OLE2/Compound File ed EMF scritti da zero senza dipendenze, binario universale, release DMG automatizzate (Swift, SwiftUI, macOS, GitHub Actions)
+\end{cvitems}
 
-  \headingBf{Electric Scooter Wheelchair}{2020 -- 2021}
-  \begin{resume_list}
-    \item Progettazione e sviluppo di un sistema per integrare monopattino elettrico con carrozzina
-    \item Creazione firmware personalizzato per migliorare le prestazioni e la sicurezza
-    \item Sviluppo di algoritmi per ottimizzare accelerazione e frenata
-    \item Modellazione 3D di componenti di collegamento tra i due mezzi
-    \item Implementazione di interfaccia software per il controllo del sistema
-  \end{resume_list}
+\cvproject{Computer Scientists Retrieval}{2020}{github.com/LucaTomei/Computer\_Scientists}
+\begin{cvitems}
+  \item Progetto di Web Information Retrieval che classifica gli informatici per influenza con PageRank e HITS su un grafo Wikipedia/DBpedia, con categorizzazione (Python, NetworkX, SPARQL/DBpedia, BeautifulSoup)
+\end{cvitems}
 
-  \headingBf{Progetti Open Source}{2016 -- Presente}
-  \begin{resume_list}
-    \item \textbf{Monolith}: Sistema di accesso ai dati basato su ontologie
-    \item \textbf{ColliGO}: Soluzione per ridurre le file e aumentare la sicurezza
-    \item \textbf{MAXG30CFW}: Creator di firmware per monopattino elettrico Ninebot
-    \item \textbf{RemindMe}: Tools Installer per ambiente Ubuntu
-    \item \textbf{GL.iNet-VpnSwitcher-OpenWrt}: Sistema di switch VPN automatizzato
-    \item \textbf{Hoodie-MusicDownloader}: Strumento per download di musica
-    \item \textbf{Esp32-Cam-PIR-Telegram}: Sistema di sorveglianza con notifiche Telegram
-  \end{resume_list}
+\cvproject{Altri progetti open source}{2019 -- Presente}{}
+\begin{cvitems}
+  \item \textbf{MAXG30CFW} \textendash\ generatore di firmware per Ninebot Max G30 (Python, reverse engineering) \cvsep\ \textbf{telegram-ha-monitor} \textendash\ bot di monitoraggio multi-server con leader election e RBAC \cvsep\ \textbf{Esp32-Cam-PIR-Telegram} \textendash\ videocamera con sensore di movimento controllata via Telegram (C++) \cvsep\ \textbf{GL.iNet VPN Switcher} (OpenWrt) \cvsep\ \textbf{Hoodie} (iOS) e \textbf{Terminal Watch Face} (watchOS) in Swift \cvsep\ \textbf{LightTextEditor} (C) \cvsep\ \textbf{FlyingBear Ghost 5} (stampa 3D)
+\end{cvitems}
 
+%% --------------------------------------------------------- Certificazioni
+\section{Certificazioni}
+\cvcert{OutSystems Associate Reactive Developer}{OutSystems}{2024}
+\cvcert{Software Architecture Fundamentals; Artificial Intelligence Fundamentals: Machine Learning}{Birdify \textendash\ LMSAFP}{2024}
+\cvcert{Introducing Semantic Kernel: Building AI-Based Apps}{LinkedIn Learning}{2024}
+\cvcert{Introduction to iOS Mobile Application Development}{Meta, Coursera}{2023}
+\cvcert{Academy Accreditation \textendash\ Databricks Lakehouse Fundamentals}{Databricks}{2022}
+\cvcert{Introduction to Cloud Computing; Introduction to Cybersecurity Tools \& Cyber Attacks; Introduction to Data Analytics}{IBM, Coursera}{2022}
+\cvcert{Foundations of User Experience (UX) Design (2022); Crash Course on Python (2021)}{Google, Coursera}{}
+\cvcert{REST API (Intermediate); SQL (Basic, Intermediate); Java, Python, React (Basic)}{HackerRank}{2021}
 
-\newpage
-  %---------%
-  % Lingue  %
-  %---------%
+%% ----------------------------------------------------------------- Lingue
+\section{Lingue}
+\cvlanguage{Italiano}{Madrelingua} \cvsep\ \cvlanguage{Inglese}{B2 (QCER)} \cvsep\ \cvlanguage{Francese}{A2 (QCER)}
 
-  \section{Lingue}
-  
-  \begin{multicols}{3}
-    \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=50pt]
-      \item[\textbf{Italiano}] Madrelingua
-      \item[\textbf{Inglese}] Avanzato
-      \item[\textbf{Francese}] Intermedio
-    \end{itemize}
-  \end{multicols}
-
-  \vspace{50pt}
-
-  {\footnotesize\textit{Autorizzo il trattamento dei dati personali nel rispetto della vigente normativa sulla protezione dei dati personali ed, in particolare, il Regolamento Europeo per la protezione dei dati personali 2016/679, il d.lgs. 30/06/2003 n. 196 e successive modifiche e integrazioni.}}
-
-    \vspace{5pt}
-    \centering\includegraphics[width=.3\textwidth]{Mia Firma.png}
+\cvprivacy{Autorizzo il trattamento dei miei dati personali ai sensi del Regolamento UE 2016/679 (GDPR) e del D.Lgs.\ 196/2003 e successive modifiche e integrazioni.}
 
 \end{document}

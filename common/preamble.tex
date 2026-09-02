@@ -1,0 +1,163 @@
+%% ---------------------------------------------------------------------------
+%% Shared preamble for both CV versions (CV-IT/main.tex, CV-EN/main.tex).
+%%
+%% Design goals, in order of priority:
+%%   1. ATS/parser friendly: single column, real text everywhere (no icons,
+%%      no glued labels), T1 encoding, ToUnicode map, filled PDF metadata,
+%%      standard section names, A4.
+%%   2. Two pages, readable at 10pt.
+%%   3. Compiles with pdfTeX (CI) and XeTeX/LuaTeX (local checks).
+%%
+%% The content file must define, before \input-ing this file:
+%%   \cvlang        BCP-47 language tag        (e.g. en-GB, it-IT)
+%%   \cvpdftitle    PDF Title metadata
+%%   \cvpdfsubject  PDF Subject metadata
+%%   \cvpdfkeywords PDF Keywords metadata (comma separated)
+%% ---------------------------------------------------------------------------
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  % Map every glyph to Unicode so copy/paste and text extraction are exact
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\else
+  \usepackage{fontspec}
+\fi
+
+\usepackage{charter}                    % Bitstream Charter: compact, very legible
+\usepackage[a4paper,top=0.9cm,bottom=0.9cm,left=1.15cm,right=1.15cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\usepackage[hidelinks,pdfusetitle=false]{hyperref}
+\usepackage{bookmark}
+
+% ---- Colours ---------------------------------------------------------------
+\definecolor{accent}{HTML}{0D7565}
+\definecolor{rule}{HTML}{8A8F8D}
+\definecolor{muted}{HTML}{4A5250}
+
+% ---- PDF metadata (read by ATS parsers as a fallback for name/title) --------
+\hypersetup{
+  pdftitle={\cvpdftitle},
+  pdfauthor={Luca Tomei},
+  pdfsubject={\cvpdfsubject},
+  pdfkeywords={\cvpdfkeywords},
+  pdflang={\cvlang},
+  pdfdisplaydoctitle=true,
+  bookmarksnumbered=false,
+  pdfstartview={FitH},
+}
+
+% ---- Page layout -----------------------------------------------------------
+\pagestyle{empty}                       % no header/footer: parsers often misread them
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\raggedright
+\raggedbottom
+\urlstyle{same}
+\linespread{1.0}
+% Body text at 9.5/11.3pt: Charter has a large x-height, so this reads like
+% 10pt Times while fitting two full pages.
+\renewcommand{\normalsize}{\fontsize{9.5}{11}\selectfont}
+\normalsize
+
+% ---- Sections --------------------------------------------------------------
+\titleformat{\section}
+  {\color{accent}\large\bfseries\raggedright}{}{0pt}{}
+  [{\color{rule}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+% Never leave a section title alone at the bottom of a page
+\makeatletter
+\let\cv@section\section
+\renewcommand{\section}[1]{\Needspace*{5\baselineskip}\cv@section{#1}}
+\makeatother
+
+% ---- Header ----------------------------------------------------------------
+% \cvheader{Name}{Headline}{Contact line}
+% Photo on the right; every contact item is plain text (links still clickable).
+\newcommand{\cvheader}[3]{%
+  \begin{minipage}[c]{0.86\textwidth}
+    {\Huge\bfseries\color{accent}#1}\par
+    \vspace{3pt}
+    {\large\color{muted}#2}\par
+    \vspace{5pt}
+    {\small #3}\par
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[c]{0.105\textwidth}
+    \raggedleft\includegraphics[width=\linewidth]{common/foto.jpg}
+  \end{minipage}\par
+  \vspace{5pt}
+  {\color{rule}\hrule height 0.6pt}
+}
+\newcommand{\cvsep}{~\textperiodcentered~}
+
+% ---- Entries ---------------------------------------------------------------
+% \cventry{Title}{Dates}{Organisation}{Location}
+\newcommand{\cventry}[4]{%
+  \vspace{2pt}%
+  {\textbf{#1}\hfill\textbf{#2}}\par
+  {\itshape\color{muted}#3\ifstrempty{#4}{}{ \textendash\ #4}}\par
+  \vspace{1pt}%
+}
+
+% \cvsub{Title}{Dates}  -- additional role at the same organisation
+\newcommand{\cvsub}[2]{%
+  \vspace{2pt}%
+  {\textbf{#1}\hfill\textbf{#2}}\par
+  \vspace{1pt}%
+}
+
+% \cvstack{Label}{Technologies} -- keyword line closing an entry
+\newcommand{\cvstack}[2]{%
+  \vspace{1pt}{\small\textit{#1:} #2}\par
+}
+
+% Tight bullet list
+\newenvironment{cvitems}{%
+  \begin{itemize}[label=\textbullet,leftmargin=12pt,itemsep=0pt,parsep=0pt,topsep=1pt,partopsep=0pt]
+}{%
+  \end{itemize}%
+}
+
+% \cvskill{Label}{Values} -- one skill family per line, "Label: values"
+\newcommand{\cvskill}[2]{%
+  {\hangindent=1.5em\hangafter=1\textbf{#1:} #2\par}
+}
+
+% \cvproject{Name}{Right-hand note}{Repository URL (may be empty)}
+% Technologies go at the end of the bullet, in parentheses.
+\newcommand{\cvproject}[3]{%
+  \vspace{1.5pt}%
+  {\textbf{#1}\ifstrempty{#3}{}{ {\small\color{muted}\textendash\ \href{https://#3}{#3}}}\hfill\textbf{#2}}\par
+}
+
+% \cvline{Title}{Dates}{Organisation} -- single-line entry (e.g. high school)
+\newcommand{\cvline}[3]{%
+  \vspace{3pt}%
+  {\textbf{#1} {\itshape\color{muted}\textendash\ #3}\hfill\textbf{#2}}\par
+}
+
+% \cvcert{Name}{Issuer}{Year}
+\newcommand{\cvcert}[3]{%
+  {\small\textbf{#1} \textendash\ #2\ifstrempty{#3}{}{, #3}\par}
+}
+
+% \cvlanguage{Language}{Level}
+\newcommand{\cvlanguage}[2]{%
+  \textbf{#1} \textendash\ #2%
+}
+
+% \cvprivacy{Statement} -- data-processing consent + handwritten signature
+\newcommand{\cvprivacy}[1]{%
+  \vspace{4pt}%
+  {\footnotesize\itshape\color{muted}#1}\par
+  \vspace{2pt}%
+  \hfill\includegraphics[height=1cm]{common/firma.png}\par
+}

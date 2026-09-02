@@ -6,47 +6,81 @@ on:
     paths:
       - "CV-IT/**"
       - "CV-EN/**"
+      - "common/**"
+      - "scripts/**"
       - ".github/workflows/release.yml"
   workflow_dispatch:
 
 permissions:
   contents: write
 
+# One release at a time: the job pushes to main and moves the "latest" tag.
+concurrency:
+  group: release-cvs
+  cancel-in-progress: false
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Compile Italian CV
-        uses: xu-cheng/latex-action@v3
         with:
-          root_file: main.tex
-          working_directory: CV-IT
+          fetch-depth: 0
+
+      # Reproducible PDFs: pdfTeX stamps CreationDate/ModDate (and derives the
+      # trailer ID) from SOURCE_DATE_EPOCH, so unchanged sources give an
+      # identical file and nothing is committed.
+      - name: Pin document date to the last content change
+        run: |
+          epoch=$(git log -1 --format=%ct -- CV-IT CV-EN common)
+          echo "SOURCE_DATE_EPOCH=$epoch" >> "$GITHUB_ENV"
+          echo "FORCE_SOURCE_DATE=1" >> "$GITHUB_ENV"
 
       - name: Compile English CV
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: main.tex
-          working_directory: CV-EN
+          root_file: CV-EN/main.tex
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -outdir=build/en
 
-      - name: Collect PDFs
+      - name: Compile Italian CV
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: CV-IT/main.tex
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -outdir=build/it
+
+      - name: Install poppler
+        run: sudo apt-get update -q && sudo apt-get install -y -q poppler-utils
+
+      - name: Parser checks
+        run: |
+          scripts/check-cv.sh build/en/main.pdf en
+          scripts/check-cv.sh build/it/main.pdf it
+
+      - name: Collect artefacts
         run: |
           mkdir -p out
-          cp CV-IT/main.pdf out/CVE_IT_LucaTomei.pdf
-          cp CV-EN/main.pdf out/CVE_EN_LucaTomei.pdf
+          cp build/en/main.pdf out/Luca_Tomei_CV_EN.pdf
+          cp build/it/main.pdf out/Luca_Tomei_CV_IT.pdf
+          # Legacy asset names, still requested by lucasmac.xyz
+          cp out/Luca_Tomei_CV_EN.pdf out/CVE_EN_LucaTomei.pdf
+          cp out/Luca_Tomei_CV_IT.pdf out/CVE_IT_LucaTomei.pdf
+          # First-page previews for the README
+          pdftoppm -png -r 110 -f 1 -l 1 -singlefile build/en/main.pdf out/preview-en
+          pdftoppm -png -r 110 -f 1 -l 1 -singlefile build/it/main.pdf out/preview-it
 
-      - name: Update dist copies
+      - name: Update dist
         run: |
-          rm -f dist/*.pdf
-          cp out/CVE_IT_LucaTomei.pdf dist/
-          cp out/CVE_EN_LucaTomei.pdf dist/
-          if ! git diff --quiet -- dist; then
+          mkdir -p dist
+          rm -f dist/*
+          cp out/Luca_Tomei_CV_EN.pdf out/Luca_Tomei_CV_IT.pdf out/preview-en.png out/preview-it.png dist/
+          if [ -n "$(git status --porcelain -- dist)" ]; then
             git config user.name "LucaTomei"
             git config user.email "46397302+LucaTomei@users.noreply.github.com"
             git add dist
             git commit -m "Update compiled CVs"
             git push
+          else
+            echo "dist/ already up to date"
           fi
 
       - name: Publish rolling release
@@ -55,7 +89,12 @@ jobs:
           tag_name: latest
           name: Curriculum Vitae
           body: |
-            CV compilati automaticamente dall'ultima versione dei sorgenti LaTeX.
-            - `CVE_IT_LucaTomei.pdf` — versione italiana
-            - `CVE_EN_LucaTomei.pdf` — versione inglese
+            PDFs compiled from the latest LaTeX sources on `main`.
+
+            | File | Language |
+            |---|---|
+            | `Luca_Tomei_CV_EN.pdf` | English |
+            | `Luca_Tomei_CV_IT.pdf` | Italian |
+
+            `CVE_EN_LucaTomei.pdf` and `CVE_IT_LucaTomei.pdf` are the same files under their previous names.
           files: out/*.pdf
