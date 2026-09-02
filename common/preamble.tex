@@ -56,6 +56,7 @@
 }
 
 % ---- Page layout -----------------------------------------------------------
+\setlength{\unitlength}{1pt}
 \pagestyle{empty}                       % no header/footer: parsers often misread them
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
@@ -80,7 +81,7 @@
 \makeatletter
 \@beginparpenalty=10000        % lists may not start on a new page
 \let\cv@section\section
-\renewcommand{\section}[1]{\Needspace*{4\baselineskip}\cv@section{#1}}
+\renewcommand{\section}[1]{\Needspace*{6\baselineskip}\cv@section{#1}}
 \makeatother
 
 % ---- Header ----------------------------------------------------------------
@@ -99,29 +100,34 @@
   \vspace{5pt}
   {\small\color{muted}#3}\par
 }
+\makeatletter
 \newcommand{\cvheader}[3]{%
+  % The photo is drawn as an overlay in the top-right corner: the header text
+  % stays full-width plain paragraphs, so parsers never see a two-column
+  % table (Jobscan-style tools drop contact details when they do).
   \ifcvphoto
-    \begin{minipage}[c]{0.86\textwidth}
-      \cvheadertext{#1}{#2}{#3}
-    \end{minipage}%
-    \hfill
-    \begin{minipage}[c]{0.105\textwidth}
-      \raggedleft\includegraphics[width=\linewidth]{common/foto.jpg}
-    \end{minipage}\par
-  \else
-    \cvheadertext{#1}{#2}{#3}
+    \begin{picture}(0,0)
+      \put(\strip@pt\textwidth,-46){\llap{\includegraphics[height=66pt]{common/foto.jpg}}}
+    \end{picture}%
   \fi
+  \cvheadertext{#1}{#2}{#3}
   \vspace{5pt}
   {\color{accent}\hrule height 1pt}
 }
+\makeatother
 \newcommand{\cvsep}{~\textperiodcentered~}
+\newcommand{\cvbar}{~|~}   % contact separator: the form parsers expect
 
 % ---- Entries ---------------------------------------------------------------
 % \cventry{Title}{Dates}{Organisation}{Location}
 \newcommand{\cventry}[4]{%
+  \needspace{3.5\baselineskip}%
   \vspace{2pt}%
-  {\textbf{#1}\hfill{\color{muted}#2}}\par\nopagebreak
-  {\itshape\color{muted}#3\ifstrempty{#4}{}{ \textendash\ #4}}\par\nopagebreak
+  % title and organisation in one box, so they can never be split
+  \noindent\begin{minipage}{\textwidth}\raggedright
+    {\textbf{#1}\hfill{\color{muted}#2}}\par
+    {\itshape\color{muted}#3\ifstrempty{#4}{}{ \textendash\ #4}}\par
+  \end{minipage}\par\nopagebreak
   \vspace{1pt}%
 }
 
@@ -152,6 +158,7 @@
 % \cvproject{Name}{Right-hand note}{Repository URL (may be empty)}
 % Technologies go at the end of the bullet, in parentheses.
 \newcommand{\cvproject}[3]{%
+  \needspace{3\baselineskip}%
   \vspace{1.5pt}%
   {\textbf{#1}\ifstrempty{#3}{}{ {\small\color{muted}\textendash\ \href{https://#3}{#3}}}\hfill{\color{muted}#2}}\par\nopagebreak
 }
@@ -164,7 +171,7 @@
 
 % \cvcert{Name}{Issuer}{Year}
 \newcommand{\cvcert}[3]{%
-  {\small\textbf{#1} \textendash\ #2\ifstrempty{#3}{}{, #3}\par}
+  {\small\textbf{#1}\ifstrempty{#2}{}{ \textendash\ #2}\ifstrempty{#3}{}{, #3}\par}
 }
 
 % \cvlanguage{Language}{Level}
