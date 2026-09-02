@@ -14,10 +14,11 @@ on:
 permissions:
   contents: write
 
-# One release at a time: the job pushes to main and moves the "latest" tag.
+# A newer push supersedes any run still in progress: only the latest
+# sources get built, and dist/ is never pushed from a stale checkout.
 concurrency:
   group: release-cvs
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build-and-release:
@@ -78,7 +79,9 @@ jobs:
             git config user.email "46397302+LucaTomei@users.noreply.github.com"
             git add dist
             git commit -m "Update compiled CVs"
-            git push
+            # main may have moved while compiling: replay the commit on top
+            git pull --rebase origin main
+            git push origin HEAD:main
           else
             echo "dist/ already up to date"
           fi
