@@ -41,7 +41,7 @@ Software Engineer (Laurea Magistrale in Engineering in Computer Science, Sapienz
 
 \cventry{IT Development Advisor}{Febbraio 2026 -- Presente}{Yokohama TWS (già Trelleborg Wheel Systems)}{Tivoli (Roma), Italia}
 \begin{cvitems}
-  \item Definizione della strategia di sviluppo software e delle best practice, governando l'adozione di microservizi, pipeline CI/CD su Azure DevOps e deployment basati su Docker
+  \item Definizione della strategia di sviluppo e delle best practice: microservizi, pipeline CI/CD su Azure DevOps, deployment basati su Docker
   \item Sviluppatore operativo in un team IT di 4 persone (un manager, tre advisor), con ownership su qualità e prestazioni del codice negli stack .NET 8, Angular e SQL Server
   \item Progettazione e governo dell'orchestrazione API enterprise tra microservizi e sistemi legacy via Infor ION, MEC ed ESB
   \item Coordinamento della migrazione cloud di Infor M3 e del rollout di applicazioni low-code OutSystems, due già in produzione
@@ -70,9 +70,11 @@ Software Engineer (Laurea Magistrale in Engineering in Computer Science, Sapienz
   \item Tutor della sezione online (circa 100 studenti) del corso in Scala del Prof.\ Camil Demetrescu: laboratori, assignment, quiz ed esami
 \end{cvitems}
 
+\cvline{Sviluppatore software (stage)}{Luglio 2018 -- Settembre 2018}{OBDA Systems, Roma \textendash\ UI/UX e nuove funzionalità sul front end web (React, REST)}
+
 \cventry{Tecnico domotica e IT (freelance)}{Novembre 2015 -- Ottobre 2021}{Libero professionista}{Roma, Italia}
 \begin{cvitems}
-  \item Installazione e manutenzione di sistemi domotici e di controllo per abitazioni private e spazi commerciali; sviluppo di database per la gestione dei dati aziendali e consulenza tecnica
+  \item Sistemi domotici e di controllo per abitazioni e negozi; database per la gestione dei dati aziendali; consulenza tecnica
 \end{cvitems}
 
 %% -------------------------------------------------------------- Formazione
@@ -95,12 +97,12 @@ Software Engineer (Laurea Magistrale in Engineering in Computer Science, Sapienz
 
 \cvproject{Electric Scooter Wheelchair}{2020 -- 2021}{github.com/LucaTomei/Electric-Scooter-Wheelchair}
 \begin{cvitems}
-  \item Prototipo funzionante che accoppia un monopattino elettrico a una carrozzina: staffa progettata in CAD e stampata in 3D, firmware da reverse engineering con accelerazione e frenata tarate sul nuovo carico (tesi magistrale) (Python, firmware, Autodesk Fusion 360, stampa 3D)
+  \item Prototipo che accoppia un monopattino elettrico a una carrozzina: staffa CAD stampata in 3D e firmware da reverse engineering con accelerazione e frenata tarate sul nuovo carico (tesi magistrale) (Python, firmware, Fusion 360, stampa 3D)
 \end{cvitems}
 
 \cvproject{OPBG Telegram Booking Bot}{Progetto privato}{}
 \begin{cvitems}
-  \item Bot multi-utente su invito che automatizza il portale di prenotazione dell'Ospedale Pediatrico Bambino Gesù: ricerca per prestazione o medico, monitoraggio delle disponibilità con notifica o prenotazione automatica; processi bot e worker separati, protocollo di prenotazione idempotente, pannello admin (Python, aiogram, SQLAlchemy, MySQL, Docker)
+  \item Bot multi-utente su invito che automatizza il portale di prenotazione dell'Ospedale Pediatrico Bambino Gesù: monitoraggio delle disponibilità con notifica o prenotazione automatica, processi bot e worker separati, protocollo idempotente, pannello admin (Python, aiogram, SQLAlchemy, MySQL, Docker)
 \end{cvitems}
 
 \cvproject{Flipper Mi Band NFC Writer}{2025}{github.com/LucaTomei/flipper-miband-nfc-writer}
@@ -110,12 +112,12 @@ Software Engineer (Laurea Magistrale in Engineering in Computer Science, Sapienz
 
 \cvproject{Telegram Audio Transcriber}{2026}{github.com/LucaTomei/Telegram-Audio-Transcriber}
 \begin{cvitems}
-  \item Bot self-hosted che trascrive in locale messaggi vocali e file audio con modelli Whisper; pulizia opzionale del testo via endpoint compatibili OpenAI, whitelist e ruoli admin, nessuna persistenza dell'audio; deploy Docker Compose da immagini costruite in CI (Python, Faster-Whisper, ffmpeg, SQLAlchemy, Docker, GitHub Actions, GHCR)
+  \item Bot self-hosted che trascrive in locale messaggi vocali e audio con modelli Whisper; pulizia opzionale del testo via endpoint compatibili OpenAI, whitelist e ruoli admin, nessuna persistenza dell'audio, deploy Docker Compose da immagini costruite in CI (Python, Faster-Whisper, ffmpeg, SQLAlchemy, Docker, GitHub Actions)
 \end{cvitems}
 
 \cvproject{LazioHealthMonitorBot}{2025 -- Presente}{github.com/LucaTomei/LazioHealthMonitorBot}
 \begin{cvitems}
-  \item Bot usato da circa 35 persone che interroga ogni cinque minuti il servizio sanitario della Regione Lazio: notifiche in tempo reale, filtri per data, blacklist ospedali, prenotazione diretta o automatica del primo slot libero, conferme in PDF; validazione CI e immagini container a ogni release (Python, Telegram Bot API, REST, Docker, GitHub Actions, GHCR)
+  \item Bot usato da circa 35 persone che interroga ogni cinque minuti il servizio sanitario della Regione Lazio: notifiche in tempo reale, filtri, prenotazione diretta o automatica del primo slot libero, conferme in PDF, CI e immagini container a ogni release (Python, Telegram Bot API, REST, Docker, GitHub Actions)
 \end{cvitems}
 
 \cvproject{Carburanti Bot}{2026}{github.com/LucaTomei/Carburanti-Bot}
@@ -125,7 +127,7 @@ Software Engineer (Laurea Magistrale in Engineering in Computer Science, Sapienz
 
 \cvproject{Estrai Allegati}{2026}{github.com/LucaTomei/estrai-allegati}
 \begin{cvitems}
-  \item App macOS nativa che estrae i file incorporati da documenti Word, Excel e PowerPoint: parser ZIP, OLE2/Compound File ed EMF scritti da zero senza dipendenze, binario universale, release DMG automatizzate (Swift, SwiftUI, macOS, GitHub Actions)
+  \item App macOS nativa che estrae i file incorporati dai documenti Office: parser ZIP, OLE2/Compound File ed EMF scritti da zero senza dipendenze, binario universale, release DMG automatizzate (Swift, SwiftUI, GitHub Actions)
 \end{cvitems}
 
 \cvproject{Computer Scientists Retrieval}{2020}{github.com/LucaTomei/Computer\_Scientists}
@@ -135,18 +137,19 @@ Software Engineer (Laurea Magistrale in Engineering in Computer Science, Sapienz
 
 \cvproject{Altri progetti open source}{2019 -- Presente}{}
 \begin{cvitems}
-  \item \textbf{MAXG30CFW} \textendash\ generatore di firmware per Ninebot Max G30 (Python, reverse engineering) \cvsep\ \textbf{telegram-ha-monitor} \textendash\ bot di monitoraggio multi-server con leader election e RBAC \cvsep\ \textbf{Esp32-Cam-PIR-Telegram} \textendash\ videocamera con sensore di movimento controllata via Telegram (C++) \cvsep\ \textbf{GL.iNet VPN Switcher} (OpenWrt) \cvsep\ \textbf{Hoodie} (iOS) e \textbf{Terminal Watch Face} (watchOS) in Swift \cvsep\ \textbf{LightTextEditor} (C) \cvsep\ \textbf{FlyingBear Ghost 5} (stampa 3D)
+  \item \textbf{MAXG30CFW} \textendash\ generatore di firmware per Ninebot Max G30 (Python, reverse engineering) \cvsep\ \textbf{telegram-ha-monitor} \textendash\ bot di monitoraggio multi-server con leader election e RBAC \cvsep\ \textbf{Esp32-Cam-PIR-Telegram} \textendash\ videocamera con sensore di movimento controllata via Telegram (C++) \cvsep\ \textbf{Hoodie} (iOS) e \textbf{Terminal Watch Face} (watchOS) in Swift \cvsep\ \textbf{LightTextEditor} (C) \cvsep\ \textbf{ColliGO} \textendash\ bot Telegram per la gestione delle code nei negozi durante il COVID-19 (freelance, 2020)
 \end{cvitems}
 
 %% --------------------------------------------------------- Certificazioni
 \section{Certificazioni}
 \cvcert{OutSystems Associate Reactive Developer}{OutSystems}{2024}
-\cvcert{Software Architecture Fundamentals; Artificial Intelligence Fundamentals: Machine Learning}{Birdify \textendash\ LMSAFP}{2024}
-\cvcert{Introducing Semantic Kernel: Building AI-Based Apps}{LinkedIn Learning}{2024}
+\cvcert{Academy Accreditation \textendash\ Databricks Fundamentals (2025); Databricks Lakehouse Fundamentals (2022)}{Databricks}{}
+\cvcert{Fondamenti di architettura software; Fondamenti di intelligenza artificiale: apprendimento automatico; Imparare il cloud computing: concetti principali}{Birdify \textendash\ LMSAFP}{2024}
+\cvcert{Introducing Semantic Kernel: Building AI-Based Apps; Sviluppo software agile; DevSecOps; API e servizi web; Automazione dei test; Sviluppo guidato dal comportamento (BDD); Fondamenti di gestione dei progetti; Panorama delle minacce alla cybersecurity; Ingegneria dei dati; IA generativa e prompt engineering}{LinkedIn Learning}{2024}
 \cvcert{Introduction to iOS Mobile Application Development}{Meta, Coursera}{2023}
-\cvcert{Academy Accreditation \textendash\ Databricks Lakehouse Fundamentals}{Databricks}{2022}
+\cvcert{Foundations of Project Management; Foundations of User Experience (UX) Design}{Google, Coursera}{2022}
 \cvcert{Introduction to Cloud Computing; Introduction to Cybersecurity Tools \& Cyber Attacks; Introduction to Data Analytics}{IBM, Coursera}{2022}
-\cvcert{Foundations of User Experience (UX) Design (2022); Crash Course on Python (2021)}{Google, Coursera}{}
+\cvcert{Crash Course on Python; Using Python to Interact with the Operating System (Google); Divide and Conquer, Sorting and Searching, and Randomized Algorithms (Stanford)}{Coursera}{}
 \cvcert{REST API (Intermediate); SQL (Basic, Intermediate); Java, Python, React (Basic)}{HackerRank}{2021}
 
 %% ----------------------------------------------------------------- Lingue

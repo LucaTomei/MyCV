@@ -28,7 +28,7 @@
 
 % Source Sans Pro: modern, compact, Type 1 with T1 encoding (parser-safe)
 \usepackage[default,semibold]{sourcesanspro}
-\usepackage[a4paper,top=0.9cm,bottom=0.9cm,left=1.15cm,right=1.15cm]{geometry}
+\usepackage[a4paper,top=0.8cm,bottom=0.8cm,left=1.15cm,right=1.15cm]{geometry}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{titlesec}
@@ -64,18 +64,18 @@
 \urlstyle{same}
 \linespread{1.0}
 % Body text at 10/11.8pt
-\renewcommand{\normalsize}{\fontsize{10}{11.8}\selectfont}
+\renewcommand{\normalsize}{\fontsize{10}{11.5}\selectfont}
 \normalsize
 
 % ---- Sections --------------------------------------------------------------
 \titleformat{\section}
   {\color{accent}\large\bfseries\raggedright}{}{0pt}{}
   [{\color{rule}\titlerule[0.8pt]}]
-\titlespacing*{\section}{0pt}{5pt}{2pt}
+\titlespacing*{\section}{0pt}{4pt}{2pt}
 % Never leave a section title alone at the bottom of a page
 \makeatletter
 \let\cv@section\section
-\renewcommand{\section}[1]{\Needspace*{5\baselineskip}\cv@section{#1}}
+\renewcommand{\section}[1]{\Needspace*{4\baselineskip}\cv@section{#1}}
 \makeatother
 
 % ---- Header ----------------------------------------------------------------
@@ -170,7 +170,11 @@
 % \cvprivacy{Statement} -- data-processing consent + handwritten signature
 \newcommand{\cvprivacy}[1]{%
   \vspace{4pt}%
-  {\footnotesize\itshape\color{muted}#1}\par
-  \vspace{2pt}%
-  \hfill\includegraphics[height=1cm]{common/firma.png}\par
+  \begin{minipage}[c]{0.8\textwidth}
+    {\footnotesize\itshape\color{muted}#1}\par
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[c]{0.17\textwidth}
+    \raggedleft\includegraphics[height=0.9cm]{common/firma.png}
+  \end{minipage}\par
 }
