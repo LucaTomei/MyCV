@@ -115,15 +115,15 @@
 % \cventry{Title}{Dates}{Organisation}{Location}
 \newcommand{\cventry}[4]{%
   \vspace{2pt}%
-  {\textbf{#1}\hfill{\color{muted}#2}}\par
-  {\itshape\color{muted}#3\ifstrempty{#4}{}{ \textendash\ #4}}\par
+  {\textbf{#1}\hfill{\color{muted}#2}}\par\nopagebreak
+  {\itshape\color{muted}#3\ifstrempty{#4}{}{ \textendash\ #4}}\par\nopagebreak
   \vspace{1pt}%
 }
 
 % \cvsub{Title}{Dates}  -- additional role at the same organisation
 \newcommand{\cvsub}[2]{%
   \vspace{2pt}%
-  {\textbf{#1}\hfill{\color{muted}#2}}\par
+  {\textbf{#1}\hfill{\color{muted}#2}}\par\nopagebreak
   \vspace{1pt}%
 }
 
@@ -148,7 +148,7 @@
 % Technologies go at the end of the bullet, in parentheses.
 \newcommand{\cvproject}[3]{%
   \vspace{1.5pt}%
-  {\textbf{#1}\ifstrempty{#3}{}{ {\small\color{muted}\textendash\ \href{https://#3}{#3}}}\hfill{\color{muted}#2}}\par
+  {\textbf{#1}\ifstrempty{#3}{}{ {\small\color{muted}\textendash\ \href{https://#3}{#3}}}\hfill{\color{muted}#2}}\par\nopagebreak
 }
 
 % \cvline{Title}{Dates}{Organisation} -- single-line entry (e.g. high school)
