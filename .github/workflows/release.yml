@@ -55,11 +55,13 @@ jobs:
           root_file: CV-EN/nophoto.tex
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -outdir=build/en-nophoto
 
+      # build/ is created by the LaTeX container as root, so write elsewhere
       - name: Build Word versions
         run: |
           python3 -m pip install --quiet python-docx
-          scripts/build-docx.py CV-EN/main.tex build/Luca_Tomei_CV_EN.docx
-          scripts/build-docx.py CV-IT/main.tex build/Luca_Tomei_CV_IT.docx
+          mkdir -p out
+          scripts/build-docx.py CV-EN/main.tex out/Luca_Tomei_CV_EN.docx
+          scripts/build-docx.py CV-IT/main.tex out/Luca_Tomei_CV_IT.docx
 
       - name: Install poppler
         run: sudo apt-get update -q && sudo apt-get install -y -q poppler-utils
@@ -76,7 +78,6 @@ jobs:
           cp build/en/main.pdf out/Luca_Tomei_CV_EN.pdf
           cp build/it/main.pdf out/Luca_Tomei_CV_IT.pdf
           cp build/en-nophoto/nophoto.pdf out/Luca_Tomei_CV_EN_nophoto.pdf
-          cp build/*.docx out/
           # Legacy asset names, still requested by lucasmac.xyz
           cp out/Luca_Tomei_CV_EN.pdf out/CVE_EN_LucaTomei.pdf
           cp out/Luca_Tomei_CV_IT.pdf out/CVE_IT_LucaTomei.pdf
