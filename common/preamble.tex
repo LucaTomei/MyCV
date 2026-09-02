@@ -79,20 +79,33 @@
 \makeatother
 
 % ---- Header ----------------------------------------------------------------
+% The photo can be switched off (e.g. for countries where CV photos are
+% discouraged) by defining \cvnophoto before \input-ing the content file.
+\newif\ifcvphoto
+\cvphototrue
+\ifdefined\cvnophoto\cvphotofalse\fi
+
 % \cvheader{Name}{Headline}{Contact line}
 % Photo on the right; every contact item is plain text (links still clickable).
+\newcommand{\cvheadertext}[3]{%
+  {\fontsize{26}{28}\selectfont\bfseries\color{accent}#1}\par
+  \vspace{3pt}
+  {\large\color{muted}#2}\par
+  \vspace{5pt}
+  {\small\color{muted}#3}\par
+}
 \newcommand{\cvheader}[3]{%
-  \begin{minipage}[c]{0.86\textwidth}
-    {\fontsize{26}{28}\selectfont\bfseries\color{accent}#1}\par
-    \vspace{3pt}
-    {\large\color{muted}#2}\par
-    \vspace{5pt}
-    {\small\color{muted}#3}\par
-  \end{minipage}%
-  \hfill
-  \begin{minipage}[c]{0.105\textwidth}
-    \raggedleft\includegraphics[width=\linewidth]{common/foto.jpg}
-  \end{minipage}\par
+  \ifcvphoto
+    \begin{minipage}[c]{0.86\textwidth}
+      \cvheadertext{#1}{#2}{#3}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{0.105\textwidth}
+      \raggedleft\includegraphics[width=\linewidth]{common/foto.jpg}
+    \end{minipage}\par
+  \else
+    \cvheadertext{#1}{#2}{#3}
+  \fi
   \vspace{5pt}
   {\color{accent}\hrule height 1pt}
 }

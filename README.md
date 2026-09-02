@@ -11,6 +11,8 @@ LaTeX sources of my CV, built and published automatically on every push.
 
 **[⬇ English PDF](https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_EN.pdf)** ·
 **[⬇ PDF italiano](https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_IT.pdf)** ·
+[English, no photo](https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_EN_nophoto.pdf) ·
+Word: [EN](https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_EN.docx) / [IT](https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_IT.docx) ·
 [lucasmac.xyz](https://lucasmac.xyz)
 
 <br>
@@ -28,6 +30,7 @@ LaTeX sources of my CV, built and published automatically on every push.
 - **One source of truth.** Both languages share a single template (`common/preamble.tex`); only the content files differ.
 - **Always current.** A push to `main` rebuilds both PDFs, refreshes `dist/` and updates the rolling [`latest`](https://github.com/LucaTomei/MyCV/releases/tag/latest) release. My website links straight to those assets.
 - **Parser-friendly by construction.** The template is designed for applicant tracking systems, and CI verifies it on every build.
+- **Every format a portal may ask for.** PDF with and without photo, plus native Word files generated from the same sources.
 
 ## Designed for ATS parsers
 
@@ -44,33 +47,37 @@ Most job portals run the PDF through a résumé parser before a human sees it. T
 
 `scripts/check-cv.sh` extracts the text with `pdftotext` and fails the build if the page count exceeds two, the page is not A4, the metadata is empty, a contact detail or section heading is missing, or any accent/glyph came out broken.
 
+`scripts/build-docx.py` walks the same LaTeX content and writes a native `.docx` (real headings, bullet lists and document properties) for portals that only accept Word files.
+
 ## Repository layout
 
 ```
-CV-EN/main.tex        English content
-CV-IT/main.tex        Italian content
-common/preamble.tex   Shared template (layout, macros, PDF metadata)
-common/foto.jpg       Photo
-common/firma.png      Signature
-scripts/check-cv.sh   Parser checks run in CI (and by `make check`)
-dist/                 Latest compiled PDFs and previews — written by CI, do not edit
-archive/pre-2024/     Previous template (AltaCV), kept for reference
+CV-EN/main.tex         English content
+CV-EN/nophoto.tex      English build without the photo
+CV-IT/main.tex         Italian content
+common/preamble.tex    Shared template (layout, macros, PDF metadata)
+common/foto.jpg        Photo
+common/firma.png       Signature
+scripts/check-cv.sh    Parser checks run in CI (and by `make check`)
+scripts/build-docx.py  Word export from the LaTeX content
+dist/                  Latest PDFs, Word files and previews — written by CI, do not edit
+archive/pre-2024/      Previous template (AltaCV), kept for reference
 ```
 
 ## Building locally
 
-Requires a TeX distribution with `latexmk` and, for the checks, `poppler-utils`.
+Requires a TeX distribution with `latexmk`, `poppler-utils` for the checks and `python-docx` for the Word export.
 
 ```bash
-make            # build/en/main.pdf and build/it/main.pdf
+make            # PDFs (EN, IT, EN without photo) and Word files under build/
 make check      # same parser checks as CI
-make dist       # copy the PDFs to dist/ with their public names
+make dist       # copy everything to dist/ with the public names
 ```
 
 ## Release pipeline
 
 ```
-push to main ──▶ pdflatex (EN, IT) ──▶ parser checks ──▶ dist/ commit ──▶ release "latest"
+push to main ──▶ pdflatex (EN, IT, EN no photo) + Word export ──▶ parser checks ──▶ dist/ commit ──▶ release "latest"
 ```
 
 The PDF date is pinned to the last commit that touched the sources (`SOURCE_DATE_EPOCH`), so rebuilding unchanged sources produces byte-identical files and no spurious commits.
