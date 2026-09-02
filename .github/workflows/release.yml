@@ -64,15 +64,15 @@ jobs:
           # Legacy asset names, still requested by lucasmac.xyz
           cp out/Luca_Tomei_CV_EN.pdf out/CVE_EN_LucaTomei.pdf
           cp out/Luca_Tomei_CV_IT.pdf out/CVE_IT_LucaTomei.pdf
-          # First-page previews for the README
-          pdftoppm -png -r 110 -f 1 -l 1 -singlefile build/en/main.pdf out/preview-en
-          pdftoppm -png -r 110 -f 1 -l 1 -singlefile build/it/main.pdf out/preview-it
+          # Page previews for the README (preview-en-1.png, preview-en-2.png, ...)
+          pdftoppm -png -r 110 build/en/main.pdf out/preview-en
+          pdftoppm -png -r 110 build/it/main.pdf out/preview-it
 
       - name: Update dist
         run: |
           mkdir -p dist
           rm -f dist/*
-          cp out/Luca_Tomei_CV_EN.pdf out/Luca_Tomei_CV_IT.pdf out/preview-en.png out/preview-it.png dist/
+          cp out/Luca_Tomei_CV_EN.pdf out/Luca_Tomei_CV_IT.pdf out/preview-*.png dist/
           if [ -n "$(git status --porcelain -- dist)" ]; then
             git config user.name "LucaTomei"
             git config user.email "46397302+LucaTomei@users.noreply.github.com"

@@ -15,9 +15,11 @@ LaTeX sources of my CV, built and published automatically on every push.
 
 <br>
 
-<a href="https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_EN.pdf"><img src="dist/preview-en.png" width="46%" alt="First page of the English CV"></a>
+<a href="https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_EN.pdf"><img src="dist/preview-en-1.png" width="46%" alt="English CV, page 1"></a>
 &nbsp;
-<a href="https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_IT.pdf"><img src="dist/preview-it.png" width="46%" alt="Prima pagina del CV italiano"></a>
+<a href="https://github.com/LucaTomei/MyCV/releases/latest/download/Luca_Tomei_CV_EN.pdf"><img src="dist/preview-en-2.png" width="46%" alt="English CV, page 2"></a>
+
+<sub>Italian version: <a href="dist/preview-it-1.png">page 1</a> · <a href="dist/preview-it-2.png">page 2</a></sub>
 
 </div>
 
