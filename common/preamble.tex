@@ -72,8 +72,13 @@
   {\color{accent}\large\bfseries\raggedright}{}{0pt}{}
   [{\color{rule}\titlerule[0.8pt]}]
 \titlespacing*{\section}{0pt}{4pt}{2pt}
-% Never leave a section title alone at the bottom of a page
+% Never leave a section title alone at the bottom of a page, never split an
+% entry title from its bullet list, never leave a single line of a bullet
+% on the next page.
+\clubpenalty=10000
+\widowpenalty=10000
 \makeatletter
+\@beginparpenalty=10000        % lists may not start on a new page
 \let\cv@section\section
 \renewcommand{\section}[1]{\Needspace*{4\baselineskip}\cv@section{#1}}
 \makeatother
